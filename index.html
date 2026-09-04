@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuj Mishra - Math + Business @ uWaterloo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cmdk.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="js/theme.js"></script>
+</head>
+<body>
+    <header class="titlebar">
+        <div class="titlebar__group titlebar__group--left">
+            <img class="titlebar__logo" src="images/panda.png" alt="Site logo" width="20" height="20">
+            <nav class="titlebar__menu" aria-hidden="true">
+                <span class="titlebar__menu-item">File</span>
+                <span class="titlebar__menu-item">Edit</span>
+                <span class="titlebar__menu-item">Selection</span>
+                <span class="titlebar__menu-item">View</span>
+                <span class="titlebar__menu-item">Go</span>
+                <span class="titlebar__menu-item">Run</span>
+                <span class="titlebar__menu-item">Terminal</span>
+                <span class="titlebar__menu-item">Help</span>
+            </nav>
+        </div>
+
+        <div class="titlebar__group titlebar__group--center">
+            <button class="titlebar__search" type="button" data-cmdk-open aria-haspopup="dialog">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>anujmishra.dev</span>
+                <kbd data-cmdk-key></kbd>
+            </button>
+        </div>
+
+        <div class="titlebar__group titlebar__group--right">
+            <button class="theme-toggle" type="button" aria-label="Toggle light and dark theme" aria-pressed="false">
+                <svg class="icon-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="icon-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container hero">
+        <div class="hero-title">
+            <h1 class="title title-center-left">
+                Anuj Mishra
+            </h1>
+            <ul class="links">
+                <li class="link"><a data-link="email" target="_blank" href="mailto:a85mishr@uwaterloo.ca">email</a></li>
+                <li class="link"><a data-link="github" target="_blank" href="https://github.com/">github</a></li>
+                <li class="link"><a data-link="linkedin" target="_blank" href="https://linkedin.com/">linkedin</a></li>
+                <li class="link"><a data-link="resume" target="_blank" href="resume.pdf">resume</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cursor">
+        <div class="cursor__ring"></div>
+        <div class="cursor__dot"></div>
+    </div>
+
+    <dialog id="cmdk" class="cmdk" aria-label="Command menu">
+        <div class="cmdk__bar">
+            <span class="cmdk__prompt" aria-hidden="true">&gt;</span>
+            <input id="cmdk-input" class="cmdk__input" type="text" placeholder="Type a command or search…"
+                   autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true"
+                   aria-controls="cmdk-list" aria-autocomplete="list">
+        </div>
+        <ul id="cmdk-list" class="cmdk__list" role="listbox"></ul>
+        <p class="cmdk__empty" hidden>No matching commands</p>
+        <div class="cmdk__foot">
+            <span><kbd>&uarr;&darr;</kbd> navigate</span>
+            <span><kbd>Enter</kbd> select</span>
+            <span><kbd>Esc</kbd> close</span>
+        </div>
+        <p id="cmdk-status" class="sr-only" role="status" aria-live="polite"></p>
+    </dialog>
+
+    <script src="js/cursor.js"></script>
+    <script src="js/cmdk.js"></script>
+</body>
+</html>

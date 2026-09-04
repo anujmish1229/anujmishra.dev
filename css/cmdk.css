@@ -1,0 +1,176 @@
+/* ==========================================================================
+   COMMAND MENU
+
+   Built on a native <dialog> opened with showModal(). That hands us focus
+   trapping, Escape-to-close, backdrop inertness and focus restoration from
+   the platform, which is both less code and better behaved than a
+   hand-rolled focus loop (a native modal still lets focus reach browser
+   chrome, which a manual loop wrongly blocks).
+   ========================================================================== */
+
+.cmdk {
+  width: min(560px, calc(100vw - 2rem));
+  max-height: min(60vh, 520px);
+  padding: 0;
+  border: 1px solid var(--color-line-2);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .55), 0 0 0 1px var(--color-line);
+  overflow: hidden;
+  /* Sits a little above centre; a dead-centre modal reads as an alert. */
+  margin: 12vh auto auto;
+}
+
+.cmdk::backdrop {
+  background: color-mix(in srgb, var(--color-bg-sunk) 72%, transparent);
+  backdrop-filter: blur(3px);
+}
+
+.cmdk[open] {
+  animation: cmdk-in var(--dur-3) var(--ease-out);
+}
+
+@keyframes cmdk-in {
+  from { opacity: 0; transform: translateY(-8px) scale(.985); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cmdk[open] { animation: none; }
+}
+
+/* Input row --------------------------------------------------------------- */
+
+.cmdk__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.cmdk__prompt {
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  color: var(--color-accent);
+  flex: none;
+}
+
+.cmdk__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: 0;
+  background: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-ink);
+  padding: 2px 0;
+}
+
+.cmdk__input::placeholder { color: var(--color-ink-4); }
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+  padding: 4px 6px;
+  border: 1px solid var(--color-line-2);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--color-surface-2);
+  color: var(--color-ink-3);
+  white-space: nowrap;
+}
+
+/* Results ----------------------------------------------------------------- */
+
+.cmdk__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--sp-2);
+  overflow-y: auto;
+  max-height: min(42vh, 360px);
+  overscroll-behavior: contain;
+}
+
+.cmdk__group {
+  padding: var(--sp-3) var(--sp-3) var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--color-ink-4);
+}
+
+.cmdk__opt {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--color-ink-2);
+  scroll-margin: var(--sp-4);
+}
+
+.cmdk__opt[aria-selected='true'] {
+  background: var(--color-accent-wash);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-accent) 32%, transparent);
+}
+
+.cmdk__glyph {
+  flex: none;
+  width: 22px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-accent);
+}
+
+.cmdk__label { flex: 1 1 auto; min-width: 0; font-size: var(--step--1); }
+
+/* The characters that actually matched the query. */
+.cmdk__label b {
+  color: var(--color-accent-hi);
+  font-weight: 600;
+}
+
+.cmdk__meta {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--color-ink-4);
+}
+
+.cmdk__empty {
+  margin: 0;
+  padding: var(--sp-7) var(--sp-5);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  color: var(--color-ink-3);
+}
+
+/* Footer hints ------------------------------------------------------------ */
+
+.cmdk__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  padding: var(--sp-3) var(--sp-5);
+  border-top: 1px solid var(--color-line);
+  background: var(--color-bg-sunk);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--color-ink-4);
+}
+
+.cmdk__foot span { display: inline-flex; align-items: center; gap: 6px; }
+
+@media (max-width: 520px) {
+  .cmdk { margin-top: 6vh; }
+  .cmdk__foot { display: none; }
+}
