@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-11T00:00:00Z",
+  "title": "Design System: anujmishra.dev",
+  "extensions": {
+    "colorMeta": {
+      "bg": { "role": "neutral", "displayName": "Graphite Ground", "canonical": "#0b0e11", "tonalRamp": ["#07090b", "#0b0e11", "#12161c", "#181d24", "#22272f", "#3a4149", "#6b7480", "#9aa3ad"] },
+      "bg-sunk": { "role": "neutral", "displayName": "Sunk Graphite", "canonical": "#07090b", "tonalRamp": ["#020304", "#07090b", "#0b0e11", "#12161c", "#181d24", "#3a4149", "#6b7480", "#9aa3ad"] },
+      "surface": { "role": "neutral", "displayName": "Surface Graphite", "canonical": "#12161c", "tonalRamp": ["#07090b", "#0b0e11", "#12161c", "#181d24", "#22272f", "#3a4149", "#6b7480", "#9aa3ad"] },
+      "surface-2": { "role": "neutral", "displayName": "Surface Graphite Raised", "canonical": "#181d24", "tonalRamp": ["#0b0e11", "#12161c", "#181d24", "#22272f", "#2c323b", "#454c56", "#6b7480", "#9aa3ad"] },
+      "ink": { "role": "neutral", "displayName": "Soft Off-White Ink", "canonical": "#e6e8eb", "tonalRamp": ["rgba(230,232,235,0.12)", "rgba(230,232,235,0.28)", "rgba(230,232,235,0.42)", "rgba(230,232,235,0.58)", "rgba(230,232,235,0.6)", "rgba(230,232,235,0.82)", "rgba(230,232,235,0.92)", "#e6e8eb"] },
+      "accent-head": { "role": "primary", "displayName": "HEAD Pink", "canonical": "#f4858c", "tonalRamp": ["#4a1418", "#7a2129", "#a92e3a", "#d64653", "#f4858c", "#ffb3b8", "#ffd0d3", "#ffe8e9"] },
+      "commit-green": { "role": "secondary", "displayName": "Commit Green", "canonical": "#3fb950", "tonalRamp": ["#0e2913", "#1a4a24", "#286c35", "#338f43", "#3fb950", "#6fd17c", "#a3e3ac", "#d3f3d7"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "HEAD Commit Message", "purpose": "The single largest text on the page — the HEAD commit's one-line message only." },
+      "body": { "displayName": "Commit Message", "purpose": "Ordinary commit messages and base page prose." },
+      "label": { "displayName": "Ledger Label", "purpose": "Ref names, hashes, badges, command labels, control text." },
+      "ledger-micro": { "displayName": "Ledger Micro", "purpose": "Diff stats, diff body lines, EOF marker, dropdown/footer meta." }
+    },
+    "shadows": [
+      { "name": "popover-float", "value": "0 16px 40px rgba(0,0,0,.45)", "purpose": "The ref selector's open dropdown list." },
+      { "name": "dialog-float", "value": "0 24px 80px rgba(0,0,0,.55), 0 0 0 1px var(--color-line)", "purpose": "The ⌘K command dialog." },
+      { "name": "toast-float", "value": "0 12px 32px rgba(0,0,0,.45)", "purpose": "The bottom-anchored copy-confirmation toast." },
+      { "name": "head-halo", "value": "0 0 0 4px var(--color-bg), 0 0 0 6px var(--color-accent-wash)", "purpose": "Double-ring halo around the HEAD commit dot marking active state." }
+    ],
+    "motion": [
+      { "name": "dur-1", "value": "120ms", "purpose": "Micro-interactions." },
+      { "name": "dur-2", "value": "200ms", "purpose": "Standard control transitions (border/background/transform)." },
+      { "name": "dur-3", "value": "500ms", "purpose": "The ⌘K dialog open animation." },
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Universal easing for all timed transitions." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "640px" },
+      { "name": "cmdk-compact", "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Commit Row",
+      "kind": "custom",
+      "refersTo": "commit-row",
+      "description": "The atomic disclosure unit of the log: graph dot, message, mono metadata, diff-stat, expandable diff detail.",
+      "html": "<li class=\"ds-commit\"><div class=\"ds-commit__rail\"><span class=\"ds-commit__dot\"></span></div><div class=\"ds-commit__body\"><button class=\"ds-commit__row\" aria-expanded=\"false\"><div class=\"ds-commit__top\"><span class=\"ds-commit__msg\">feat(myhighschool.club): lead production &amp; deployment of a web-presence platform for HS clubs</span></div><div class=\"ds-commit__meta\"><span class=\"ds-commit__hash\">a3f9c12</span><span>2mo ago</span><span class=\"ds-commit__stat\"><span class=\"ds-commit__stat-add\">+128</span><span class=\"ds-commit__stat-del\">−4</span></span></div></button></div></li>",
+      "css": ".ds-commit { display: grid; grid-template-columns: 26px 1fr; column-gap: 16px; position: relative; } .ds-commit__rail { position: relative; display: flex; justify-content: center; } .ds-commit__dot { margin-top: 0.8rem; width: 8px; height: 8px; border-radius: 50%; background: #3fb950; box-shadow: 0 0 0 4px #0b0e11; } .ds-commit__row { display: block; width: 100%; text-align: left; background: none; border: 0; padding: 0.55rem 1.9rem 0.5rem 12px; border-radius: 6px; cursor: pointer; color: #e6e8eb; font-family: Archivo, sans-serif; } .ds-commit__row:hover { background: #12161c; } .ds-commit__msg { font-size: 15px; font-weight: 500; } .ds-commit__meta { display: flex; gap: 0.6em; margin-top: 0.3em; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(230,232,235,0.58); } .ds-commit__hash { color: rgba(230,232,235,0.6); } .ds-commit__stat-add { color: #3fb950; } .ds-commit__stat-del { color: #f4858c; }"
+    },
+    {
+      "name": "Ref Selector Trigger",
+      "kind": "nav",
+      "refersTo": "ref-trigger",
+      "description": "The single primary navigation control; redraws the whole log in place on selection.",
+      "html": "<button class=\"ds-ref\" aria-haspopup=\"listbox\" aria-expanded=\"false\"><svg width=\"13\" height=\"13\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><circle cx=\"4\" cy=\"4\" r=\"2\" stroke=\"currentColor\" stroke-width=\"1.4\"></circle><circle cx=\"4\" cy=\"13\" r=\"2\" stroke=\"currentColor\" stroke-width=\"1.4\"></circle><circle cx=\"12\" cy=\"8.5\" r=\"2\" stroke=\"currentColor\" stroke-width=\"1.4\"></circle><path d=\"M4 6v3a4 4 0 0 0 4 4h2M4 6v1\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\"></path></svg><span class=\"ds-ref__name\">main</span><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\" aria-hidden=\"true\"><path d=\"M2 3.5 5 6.5 8 3.5\" stroke=\"currentColor\" stroke-width=\"1.4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></svg></button>",
+      "css": ".ds-ref { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid rgba(230,232,235,0.18); border-radius: 6px; background: transparent; color: rgba(230,232,235,0.6); cursor: pointer; font-size: 13px; transition: border-color 200ms cubic-bezier(0.16,1,0.3,1), background 200ms cubic-bezier(0.16,1,0.3,1); } .ds-ref:hover { background: #12161c; } .ds-ref__name { font-family: 'JetBrains Mono', monospace; color: #f4858c; font-weight: 500; }"
+    },
+    {
+      "name": "Command Menu Option",
+      "kind": "custom",
+      "refersTo": "cmdk-option-selected",
+      "description": "A result row inside the ⌘K dialog; icon is always a drawn SVG, never a Unicode glyph.",
+      "html": "<li class=\"ds-cmdk-opt\" aria-selected=\"true\"><span class=\"ds-cmdk-opt__glyph\"><svg width=\"14\" height=\"14\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><rect x=\"1.5\" y=\"3.5\" width=\"13\" height=\"9\" rx=\"1.3\" stroke=\"currentColor\" stroke-width=\"1.3\"></rect><path d=\"M2 4.5l6 4.5 6-4.5\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"></path></svg></span><span class=\"ds-cmdk-opt__label\">Send an email</span><span class=\"ds-cmdk-opt__meta\">mailto</span></li>",
+      "css": ".ds-cmdk-opt { display: flex; align-items: center; gap: 16px; padding: 0.6rem 0.7rem; border-radius: 6px; cursor: pointer; color: rgba(230,232,235,0.82); font-family: Archivo, sans-serif; } .ds-cmdk-opt[aria-selected='true'] { background: rgba(244,133,140,0.14); color: #e6e8eb; box-shadow: inset 0 0 0 1px rgba(244,133,140,0.32); } .ds-cmdk-opt__glyph { flex: none; width: 22px; text-align: center; color: #f4858c; } .ds-cmdk-opt__label { flex: 1 1 auto; font-size: 13px; } .ds-cmdk-opt__meta { flex: none; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(230,232,235,0.58); }"
+    },
+    {
+      "name": "Diff Detail Block",
+      "kind": "custom",
+      "refersTo": "commit-row",
+      "description": "Expandable diff-styled detail under a commit row: green additions, muted removals/untracked lines.",
+      "html": "<pre class=\"ds-diff\"><span class=\"ds-diff__line ds-diff__line--add\"><span class=\"ds-diff__marker\">+</span><span class=\"ds-diff__text\">Led production deployment for 6 school clubs</span></span><span class=\"ds-diff__line ds-diff__line--untracked\"><span class=\"ds-diff__marker\"> </span><span class=\"ds-diff__text\">resume.pdf — untracked, not committed yet</span></span></pre>",
+      "css": ".ds-diff { margin: 0; padding: 12px 16px; background: #07090b; border: 1px solid rgba(230,232,235,0.09); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.75; white-space: pre-wrap; } .ds-diff__line { display: block; } .ds-diff__marker { display: inline-block; width: 1.3em; color: rgba(230,232,235,0.58); } .ds-diff__line--add .ds-diff__marker { color: #3fb950; } .ds-diff__line--add .ds-diff__text { color: rgba(230,232,235,0.82); } .ds-diff__line--untracked .ds-diff__text { color: rgba(230,232,235,0.58); text-decoration: underline dashed rgba(230,232,235,0.18); text-underline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Git History as Career",
+    "overview": "The site is Anuj's career rendered as a real, browsable commit log rather than a decorative metaphor: every project is a commit, every role is a merged branch, every skill surfaces as a diff line. One committed world — a near-black graphite ground read the way a repo is read, in a browser tab at a desk — with no light theme to hedge against it. The single ref selector (main / experience / about) is the entire navigation model: it redraws the same log in place rather than routing to new pages, so the whole site behaves like `git checkout <ref>`. The system is monospace-ledger-first for anything that carries a fact (hashes, dates, refs, diff stats, command labels) and humanist-sans for anything that carries a claim (commit messages, prose, notes). Depth is conveyed by graphite tonal layering, not shadows, except for two floating overlays — the ref dropdown and the ⌘K dialog — which are the only elements allowed real elevation because they visually detach from the log's flow. The pink accent (#f4858c) is a pinned carry-over from the prior VS Code-titlebar design, repurposed here to mark the HEAD/active ref exclusively — it never decorates.",
+    "keyCharacteristics": [
+      "Dark-only, single committed world — no theme toggle.",
+      "Ledger monospace for metadata, humanist sans for messages and prose.",
+      "A single warm-pink accent, reserved for HEAD/active state only.",
+      "Flat, tonally-layered surfaces; shadows appear only on the two floating overlays (ref list, ⌘K dialog).",
+      "The commit log is the entire page; there is no hero image or centered name."
+    ],
+    "rules": [
+      { "name": "The Two-Signal Rule", "body": "Only two hues carry meaning on this site: green for shipped/ordinary, pink for HEAD/active. No third accent is introduced for any future section — a new state reuses one of these two rather than inventing a color.", "section": "colors" },
+      { "name": "The Accent-Is-State Rule", "body": "Pink is never decorative. Every pixel of #f4858c on the page corresponds to \"this is the currently active thing\" (HEAD dot, active ref, focused control, an actively-open diff's removed lines). If a future element needs pink and isn't marking active state, that's a misuse.", "section": "colors" },
+      { "name": "The Ledger/Prose Split Rule", "body": "If a piece of text is a fact about a commit (hash, timestamp, ref, stat count), it renders in JetBrains Mono. If it's a claim a human wrote (a commit message, a note, a prose sentence), it renders in Archivo. Never mix the two roles onto the same string.", "section": "typography" },
+      { "name": "The Overlay-Only Shadow Rule", "body": "Shadows exist only on things that detach from the page's normal flow (dropdown, dialog, toast) or on the single HEAD-marker halo. No card, row, or button at rest carries a shadow — depth there comes from the graphite tonal steps alone.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do treat pink (#f4858c) as an active-state signal only — HEAD dot, active ref, focus, diff − lines — never as decoration.",
+      "Do render every command-palette result icon as a hand-drawn SVG matched to the header's branch/search glyph stroke weight, never a Unicode character.",
+      "Do keep every diff stat (+add/−del) sourced from real content data, never a placeholder count.",
+      "Do use --color-ink-4 (rgba(230,232,235,.58)) as the canonical quietest-text value — it was tuned during the finish-review fix round specifically to clear contrast on the graphite ground; don't substitute a dimmer ad hoc value.",
+      "Do reserve 12px radius and real box-shadow for the two floating overlays (ref dropdown, ⌘K dialog) only; everything else at rest is flat and 6px-radius."
+    ],
+    "donts": [
+      "Don't add a colored border-left (or any left-edge accent stripe) to the ref selector or any other control — this was a finish-review finding, removed, and must not recur.",
+      "Don't fabricate a build/deploy step in the boot sequence that this static, no-build-step site doesn't actually perform (the shipped boot copy — clone, push to main, open the live URL — describes only real, literal actions).",
+      "Don't introduce a third accent hue; the system is a strict two-signal palette (green = shipped, pink = active).",
+      "Don't add drop shadows to commit rows, buttons, or any element at rest — depth here comes from graphite tonal layering, not shadow."
+    ]
+  }
+}

@@ -8,6 +8,9 @@
    The combobox follows the ARIA authoring practice: focus stays in the text
    input and the active option is pointed at with aria-activedescendant, so
    screen readers announce each result as you arrow through them.
+
+   Commands are read straight from data.js (SITE, REFS) so the palette can
+   never drift from the commit log itself.
    ========================================================================== */
 
 (function () {
@@ -22,17 +25,20 @@
   var status = document.getElementById('cmdk-status');
 
   var isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  var EMAIL = SITE.email;
+
+  /* ------------------------------------------------------------- icons */
+  /* Drawn to match the header's branch/search glyphs: same viewBox, stroke
+     weight and currentColor — never a Unicode character standing in. */
+
+  var ICONS = {
+    branch: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="4" cy="4" r="1.8" stroke="currentColor" stroke-width="1.4"></circle><circle cx="4" cy="13" r="1.8" stroke="currentColor" stroke-width="1.4"></circle><circle cx="12" cy="8.5" r="1.8" stroke="currentColor" stroke-width="1.4"></circle><path d="M4 6v3a4 4 0 0 0 4 4h2M4 6v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>',
+    mail: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1.3" stroke="currentColor" stroke-width="1.3"></rect><path d="M2 4.5l6 4.5 6-4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>',
+    external: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6.5 3H3.4A1.4 1.4 0 0 0 2 4.4v8.2A1.4 1.4 0 0 0 3.4 14h8.2A1.4 1.4 0 0 0 13 12.6V9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path><path d="M9.5 2h4.5v4.5M14 2 8 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+    file: '<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 2h5l3 3v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path><path d="M9 2v3h3" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path></svg>'
+  };
 
   /* ------------------------------------------------------------ commands */
-
-  // The .link anchors in the hero are the single source of truth for these
-  // URLs; commands read from them instead of duplicating a hardcoded copy.
-  function linkHref(name) {
-    var a = document.querySelector('[data-link="' + name + '"]');
-    return a ? a.getAttribute('href') : '';
-  }
-
-  var EMAIL = linkHref('email').replace(/^mailto:/, '');
 
   function open(url) {
     return function () {
@@ -41,19 +47,35 @@
     };
   }
 
-  var COMMANDS = [
-    { g: 'Actions', icon: '@', label: 'Copy email address', keys: 'clipboard mail contact', meta: EMAIL, run: copyEmail },
-    { g: 'Actions', icon: '@', label: 'Send an email',      keys: 'mailto contact write', run: function () { close(); location.href = 'mailto:' + EMAIL; } },
-    { g: 'Actions', icon: '>', label: 'Open GitHub',        keys: 'code repos source',    run: open(linkHref('github')) },
-    { g: 'Actions', icon: '>', label: 'Open LinkedIn',      keys: 'profile connect',      run: open(linkHref('linkedin')) },
-    { g: 'Actions', icon: '>', label: 'Open resume',        keys: 'cv pdf export',        run: open(linkHref('resume')) },
+  function checkout(ref) {
+    return function () {
+      close();
+      if (window.checkoutRef) window.checkoutRef(ref);
+      var target = document.getElementById('log');
+      if (target) target.scrollIntoView({ block: 'start' });
+    };
+  }
 
-    { g: 'View', icon: '*', label: 'Toggle light / dark theme', keys: 'colour color mode contrast', run: function () {
-        close();
-        var t = document.querySelector('.theme-toggle');
-        if (t) t.click();
-      } }
+  var COMMANDS = [
+    { g: 'Go', icon: ICONS.branch, label: 'git checkout main',       keys: 'projects home ref branch', run: checkout('main') },
+    { g: 'Go', icon: ICONS.branch, label: 'git checkout experience', keys: 'roles jobs work ref branch', run: checkout('experience') },
+    { g: 'Go', icon: ICONS.branch, label: 'git checkout about',      keys: 'education skills bio ref branch', run: checkout('about') },
+
+    { g: 'Contact', icon: ICONS.mail, label: 'Copy email address', keys: 'clipboard mail contact', meta: EMAIL, run: copyEmail },
+    { g: 'Contact', icon: ICONS.mail, label: 'Send an email',      keys: 'mailto contact write', run: function () { close(); location.href = 'mailto:' + EMAIL; } },
+    { g: 'Contact', icon: ICONS.external, label: 'Open GitHub',    keys: 'code repos source anujmish1229', run: open(SITE.github) },
+    { g: 'Contact', icon: ICONS.external, label: 'Open LinkedIn',  keys: 'profile connect anujmish', run: open(SITE.linkedin) },
+    { g: 'Contact', icon: ICONS.file, label: 'Open resume',        keys: 'cv pdf export', run: function () { close(); toast('resume.pdf — untracked, not committed yet'); } }
   ];
+
+  (REFS.main.commits || []).forEach(function (c) {
+    if (!c.link) return;
+    COMMANDS.push({
+      g: 'Projects', icon: ICONS.external, label: 'Open ' + (c.id === 'myhighschool' ? 'myHighSchool.club' : c.message.replace(/^[a-z]+\(([^)]+)\):.*/, '$1')),
+      keys: c.message + ' ' + (c.tags || []).join(' '),
+      run: open(c.link)
+    });
+  });
 
   function copyEmail() {
     var done = function () { toast('Email copied'); };

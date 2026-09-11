@@ -173,4 +173,5 @@ kbd {
 @media (max-width: 520px) {
   .cmdk { margin-top: 6vh; }
   .cmdk__foot { display: none; }
+  .cmdk__meta { display: none; }
 }
