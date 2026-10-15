@@ -117,6 +117,19 @@ var REFS = {
                 ]
             },
             {
+                id: 'about-awards',
+                title: 'Awards',
+                open: true,
+                lines: [
+                    'Bronze (3rd) — Skills Ontario, Web Design & Development, May 2026',
+                    '1st — Skills Durham, Web Design & Development, Mar 2026',
+                    '1st — Ontario Tech University × Sun Life CTF, Oct 2025',
+                    '4th — Skills Ontario, Web Design & Development, May 2025',
+                    '2nd — Skills Durham, Web Design & Development, Mar 2025',
+                    '3rd — NASA Space Apps Challenge, Oct 2024'
+                ]
+            },
+            {
                 id: 'about-skills',
                 title: 'Skills',
                 open: true,
