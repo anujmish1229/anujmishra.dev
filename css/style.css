@@ -1,8 +1,8 @@
 /* ==========================================================================
    anujmishra.dev — "Git History as Career"
 
-   The site is a real git log: every project a commit, every skill a diff,
-   every role a branch merged into main. One committed world, dark ground —
+   The site is a git log: every project a commit, every role a branch
+   merged into main. One committed world, dark ground —
    this is read in browser tabs, at a desk, the way any repo is. No light
    theme to hedge with; the pink accent is the one carried over from the
    previous design, marking HEAD/active state only.
@@ -225,7 +225,8 @@ html.boot-play .boot__line {
     top: 0;
     z-index: 100;
     height: var(--bar-h);
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: var(--sp-4);
     padding: 0 var(--sp-4);
@@ -240,7 +241,7 @@ html.boot-play .boot__line {
     align-items: center;
     gap: var(--sp-3);
     min-width: 0;
-    flex: 1 1 0;
+    justify-self: start;
     text-decoration: none;
     border-radius: var(--radius);
     padding: 4px 6px;
@@ -253,101 +254,47 @@ html.boot-play .boot__line {
 .bar__path {
     font-family: var(--font-mono);
     font-size: var(--step--1);
-    color: var(--color-ink-3);
+    color: var(--color-ink-2);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
-.bar__user { color: var(--color-ink-2); }
-.bar__slash { color: var(--color-ink-4); padding: 0 1px; }
-.bar__repo { color: var(--color-ink); font-weight: 500; }
 
 .bar__find {
-    flex: 1 1 0;
-    max-width: 220px;
+    justify-self: end;
     display: flex;
     align-items: center;
     gap: var(--sp-2);
-    padding: 6px var(--sp-3);
+    padding: 6px 10px;
     border: 1px solid var(--color-line-2);
     border-radius: var(--radius);
     background: var(--color-bg-sunk);
     color: var(--color-ink-3);
     cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: var(--step--1);
-    justify-content: center;
     transition: border-color var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
 }
 .bar__find:hover { border-color: var(--color-accent); color: var(--color-ink); }
 .bar__find kbd {
     font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 2px 5px;
-    border: 1px solid var(--color-line-2);
-    border-radius: 4px;
-    background: var(--color-surface);
+    font-size: 11px;
     color: var(--color-ink-4);
 }
 
-/* Ref selector — the one lever that redraws the page --------------------- */
+/* Tabs — one lever that redraws the log in place ------------------------- */
 
-.ref { position: relative; flex: none; }
+.tabs { display: flex; gap: 2px; }
 
-.ref__trigger {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+.tabs__tab {
     padding: 6px var(--sp-3);
-    border: 1px solid var(--color-line-2);
+    border: 0;
     border-radius: var(--radius);
     background: transparent;
+    color: var(--color-ink-3);
     cursor: pointer;
+    font-family: var(--font-mono);
     font-size: var(--step--1);
-    transition: border-color var(--dur-2) var(--ease-out), background var(--dur-2) var(--ease-out);
+    transition: background var(--dur-2) var(--ease-out), color var(--dur-2) var(--ease-out);
 }
-.ref__trigger:hover { background: var(--color-surface); }
-.ref__trigger[aria-expanded="true"] { border-color: var(--color-accent); }
-
-.ref__icon { color: var(--color-ink-3); flex: none; }
-.ref__name { font-family: var(--font-mono); color: var(--color-accent); font-weight: 500; }
-.ref__caret { color: var(--color-ink-3); flex: none; transition: transform var(--dur-2) var(--ease-out); }
-.ref__trigger[aria-expanded="true"] .ref__caret { transform: rotate(180deg); }
-
-.ref__list {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 110;
-    min-width: 190px;
-    margin: 0;
-    padding: 6px;
-    list-style: none;
-    border: 1px solid var(--color-line-2);
-    border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-}
-
-.ref__list li {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--sp-3);
-    padding: 7px var(--sp-3);
-    border-radius: var(--radius);
-    cursor: pointer;
-}
-.ref__list li:hover { background: var(--color-surface-2); }
-.ref__list li[aria-selected="true"] {
-    background: var(--color-accent-wash);
-    box-shadow: inset 0 0 0 1px rgba(var(--color-accent-rgb), 0.35);
-}
-.ref__list li[aria-selected="true"] .ref__optname { color: var(--color-accent-hi); }
-
-.ref__optname { font-family: var(--font-mono); font-size: var(--step--1); }
-.ref__optdesc { font-family: var(--font-mono); font-size: var(--step--2); color: var(--color-ink-4); }
+.tabs__tab:hover { background: var(--color-surface); color: var(--color-ink); }
+.tabs__tab[aria-current="page"] { color: var(--color-accent); background: var(--color-accent-wash); }
 
 /* The log ------------------------------------------------------------- */
 
@@ -362,13 +309,6 @@ html.boot-play .boot__line {
     margin: 0;
     padding: 0;
     position: relative;
-}
-
-.log__eof {
-    margin: var(--sp-6) 0 0 calc(var(--rail-w) + var(--sp-4));
-    font-family: var(--font-mono);
-    font-size: var(--step--2);
-    color: var(--color-ink-4);
 }
 
 .commit {
@@ -393,7 +333,7 @@ html.boot-play .boot__line {
     background: var(--color-line-2);
     transform: translateX(-50%);
 }
-.commit:first-child .commit__rail::before { top: 1.05rem; }
+.commit:first-child .commit__rail::before { top: 1.1rem; }
 .commit:last-child .commit__rail::before { bottom: calc(100% - 1.05rem); }
 
 .commit__dot {
@@ -408,6 +348,7 @@ html.boot-play .boot__line {
 }
 
 .commit--head .commit__dot {
+    margin-top: 0.85rem;
     width: 10px;
     height: 10px;
     background: var(--color-accent);
@@ -432,51 +373,30 @@ html.boot-play .boot__line {
     text-align: left;
     background: none;
     border: 0;
-    padding: 0.55rem 1.9rem 0.5rem var(--sp-3);
+    padding: 0.55rem 2.2rem 0.5rem var(--sp-3);
     margin: 0 calc(-1 * var(--sp-3));
     border-radius: var(--radius);
-    cursor: pointer;
+    font-size: inherit;
+    line-height: inherit;
     position: relative;
 }
-.commit__row:hover { background: var(--color-surface); }
+button.commit__row { cursor: pointer; }
+button.commit__row:hover { background: var(--color-surface); }
 
-.commit__top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.5em; }
+.commit__top { display: flex; align-items: baseline; gap: var(--sp-3); }
 
-.commit__badge {
-    font-family: var(--font-mono);
-    font-size: var(--step--2);
-    color: var(--color-accent);
-    border: 1px solid rgba(var(--color-accent-rgb), 0.4);
-    border-radius: 4px;
-    padding: 1px 6px;
+.commit__msg { flex: 1 1 auto; font-weight: 500; color: var(--color-ink); }
+
+.commit__date {
     flex: none;
-}
-
-.commit__msg {
-    font-size: var(--step-0);
-    font-weight: 500;
-    color: var(--color-ink);
-}
-.commit--head .commit__msg { font-size: var(--step-1); }
-
-.commit__meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.6em;
-    margin-top: 0.3em;
     font-family: var(--font-mono);
     font-size: var(--step--2);
     color: var(--color-ink-4);
 }
-.commit__hash { color: var(--color-ink-3); }
-.commit__stat { display: inline-flex; gap: 0.4em; }
-.commit__stat-add { color: var(--color-green); }
-.commit__stat-del { color: var(--color-accent); }
-.commit__tag {
-    padding: 1px 6px;
-    border-radius: 3px;
-    background: var(--color-surface-2);
+
+.commit__summary {
+    display: block;
+    margin-top: 2px;
     color: var(--color-ink-3);
 }
 
@@ -490,7 +410,7 @@ html.boot-play .boot__line {
 }
 .commit__row[aria-expanded="true"] .commit__chevron { transform: translateY(-50%) rotate(180deg); }
 
-.commit__detail { padding: 0.4rem var(--sp-3) 0.2rem; }
+.commit__detail { padding: 0.2rem 0 0.2rem; }
 
 .diff {
     margin: 0;
@@ -501,26 +421,12 @@ html.boot-play .boot__line {
     font-family: var(--font-mono);
     font-size: var(--step--1);
     line-height: 1.75;
-    overflow-x: auto;
     white-space: pre-wrap;
 }
 
-.diff__line { display: block; }
-.diff__marker { display: inline-block; width: 1.3em; color: var(--color-ink-4); user-select: none; }
-
-.diff__line--add .diff__marker { color: var(--color-green); }
-.diff__line--add .diff__text { color: var(--color-ink-2); }
-
-.diff__line--meta .diff__text { color: var(--color-ink-4); }
-
-.diff__line--untracked .diff__marker { color: var(--color-ink-4); }
-.diff__line--untracked .diff__text {
-    color: var(--color-ink-4);
-    text-decoration: underline dashed;
-    text-decoration-color: var(--color-line-2);
-    text-underline-offset: 3px;
-    cursor: default;
-}
+.diff__line { display: block; padding-left: 1.3em; text-indent: -1.3em; }
+.diff__marker { display: inline-block; width: 1.3em; text-indent: 0; color: var(--color-green); user-select: none; }
+.diff__text { color: var(--color-ink-2); }
 
 .diff__link {
     color: var(--color-accent);
@@ -528,13 +434,37 @@ html.boot-play .boot__line {
 }
 .diff__link:hover { color: var(--color-accent-hi); text-decoration: underline solid; }
 
-.commit__note {
-    margin-top: var(--sp-3);
-    padding: 0 2px;
-    font-size: var(--step--1);
-    color: var(--color-ink-3);
-    max-width: 62ch;
+/* HEAD — name, one line, contact -------------------------------------- */
+
+.commit--head .commit__body { padding-bottom: var(--sp-7); }
+
+.head__name {
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: 0.3rem;
 }
+
+.head__bio {
+    margin-top: var(--sp-2);
+    max-width: 52ch;
+    color: var(--color-ink-2);
+}
+
+.head__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2) var(--sp-5);
+    margin-top: var(--sp-4);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+}
+.head__links a {
+    color: var(--color-accent);
+    text-decoration: underline dotted;
+}
+.head__links a:hover { color: var(--color-accent-hi); text-decoration: underline solid; }
+.head__soon { color: var(--color-ink-4); cursor: default; }
 
 /* Toast ----------------------------------------------------------------- */
 
@@ -630,12 +560,13 @@ html.boot-play .boot__line {
 @media (max-width: 640px) {
     :root { --rail-w: 18px; }
     .bar { gap: var(--sp-2); padding: 0 var(--sp-3); }
-    .bar__find span { display: none; }
-    .bar__find { max-width: none; flex: none; padding: 6px 8px; }
-    .bar__path { font-size: var(--step--2); }
-    .log { padding: var(--sp-6) var(--sp-3) var(--sp-7); }
+    .bar__path { display: none; }
+    .tabs__tab { padding: 6px 7px; }
+    .commit__row { padding-right: 1.8rem; }
+    .bar__find kbd { display: none; }
+    .log { padding: var(--sp-6) var(--sp-4) var(--sp-7); }
     .commit { column-gap: var(--sp-3); }
-    .ref__list { left: auto; right: 0; transform: none; }
+    .commit__top { flex-direction: column; gap: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -94,7 +94,7 @@ components:
 
 **Creative North Star: "Git History as Career"**
 
-The site is Anuj's career rendered as a real, browsable commit log rather than a decorative metaphor: every project is a commit, every role is a merged branch, every skill surfaces as a diff line. One committed world — a near-black graphite ground read the way a repo is read, in a browser tab at a desk — with no light theme to hedge against it. The single ref selector (`main` / `experience` / `about`) is the entire navigation model: it redraws the same log in place rather than routing to new pages, so the whole site behaves like `git checkout <ref>`.
+The site is Anuj's career rendered as a real, browsable commit log rather than a decorative metaphor: every project is a commit, every role is a merged branch, every skill surfaces as a diff line. One committed world — a near-black graphite ground read the way a repo is read, in a browser tab at a desk — with no light theme to hedge against it. Three header tabs (`projects` / `experience` / `about`) are the entire navigation model: each redraws the same log in place rather than routing to new pages, so the whole site behaves like `git checkout <ref>`. The git metaphor lives in the structure (rail, dots, diffs), not in fake git text: no conventional-commit prefixes, hashes, diff-stat counts, tag chips, or EOF lines.
 
 The system is monospace-ledger-first for anything that carries a fact (hashes, dates, refs, diff stats, command labels) and humanist-sans for anything that carries a claim (commit messages, prose, notes). Depth is conveyed by graphite tonal layering, not shadows, except for two floating overlays — the ref dropdown and the ⌘K dialog — which are the only elements allowed real elevation because they visually detach from the log's flow. The pink accent (`#f4858c`) is a pinned carry-over from the prior VS Code-titlebar design, repurposed here to mark the HEAD/active ref exclusively — it never decorates.
 
@@ -110,7 +110,7 @@ The system is monospace-ledger-first for anything that carries a fact (hashes, d
 A near-black graphite ground with a two-color signal system: green for shipped/growth, pink for HEAD/active — nothing else carries color.
 
 ### Primary
-- **HEAD Pink** (`#f4858c`, hi state `#ffb3b8`): marks the HEAD commit dot, the active ref name in the selector, focus outlines, diff `−` (removed/retired) lines, links inside diffs, and the ⌘K prompt glyph/selected-row wash. Never used decoratively — its presence always means "this is the active/current one."
+- **HEAD Pink** (`#f4858c`, hi state `#ffb3b8`): marks the HEAD commit dot, the active ref name in the selector, focus outlines, diff `−` (removed/retired) lines, links inside diffs, and the ⌘K prompt glyph/selected-row wash. Also marks the active tab and HEAD contact links. Never used decoratively — its presence always means "this is the active/current one."
 
 ### Secondary
 - **Commit Green** (`#3fb950`): marks ordinary (non-HEAD) commit dots and diff `+` (shipped) lines — the "this shipped" signal.
@@ -181,7 +181,7 @@ Two radii cover the whole system: `6px` (`--radius`) for nearly everything inter
 - **Hover / Focus:** all interactive controls transition `border-color`/`background` over 200ms (`--ease-out`); focus-visible everywhere is a solid 2px HEAD-pink outline with 2px offset — one universal focus treatment, no per-component variants.
 
 ### Commit Row (signature component)
-The atomic unit of the entire site. A full-width, left-aligned disclosure button: a graph dot in the rail column, then a top line (mono ref badge if tagged + sans commit message), a meta line (mono hash, relative date, `+add`/`−del` diff-stat counts, optional tag chips), and a chevron that rotates 180° when expanded. Expanding reveals a `.diff`-styled detail block: sunk-graphite background, hairline border, mono text at 1.75 line-height, with `+` lines in commit-green and `−`/untracked lines in ink-4 (untracked entries additionally get a dashed underline to read as "not yet real"). The HEAD row is distinguished only by a larger message size and the pink halo dot — no badge, no border, no background tint.
+The atomic unit of the entire site. A graph dot in the rail column, then a plain-language title (Archivo 500) with its date in mono at the right, and a one-line summary in ink-3 beneath. Rows with detail lines are disclosure buttons with a chevron; expanding reveals a `.diff` block (sunk graphite, hairline border, mono, green `+` markers). Rows with no detail are static; `about` rows render their detail open. The HEAD row tops every tab: name, one-sentence bio, and mono contact links (email, GitHub, LinkedIn, resume pending), marked by the pink halo dot.
 
 ### Cards / Containers
 - **Corner Style:** 6px (diff blocks, toasts) or 12px (ref dropdown, ⌘K dialog).
@@ -195,8 +195,8 @@ The atomic unit of the entire site. A full-width, left-aligned disclosure button
 - **Focus:** no visible focus ring on the ⌘K text input itself (the dialog border stands in); the global focus-visible outline governs every other focusable control.
 
 ### Navigation
-- **Style:** the ref selector is the sole primary navigation control — a listbox-pattern popover, mono type, current selection marked with a pink wash + inset ring and pink-hi text. Switching a ref redraws the log in place; there is no separate page navigation, breadcrumb, or nav bar beyond the top bar's three regions.
-- **Mobile:** ref dropdown re-anchors right-edge instead of center; the `find` control collapses to an icon-only square; the top bar's rail column narrows.
+- **Style:** three mono tabs centered in the top bar; the current one is HEAD pink on a pink wash (`aria-current="page"`). Switching a tab redraws the log in place.
+- **Mobile:** the `anujmishra.dev` label hides (panda only), tabs tighten, and the `find` control drops its kbd chip.
 
 ### Command Menu ⌘K (signature component)
 A native `<dialog>` opened via `showModal()` for free focus-trapping/backdrop-inertness, styled as a floating terminal prompt: a `>` mono prompt glyph, borderless mono input, and a scrollable grouped result list (Go / Contact / Projects, generated live from the same data the commit log renders from, so it can never drift out of sync). Every result row carries a hand-drawn SVG icon (branch/mail/external-link/file — matched to the header's own branch-glyph stroke weight and viewBox) rather than a Unicode character standing in for an icon; this was a finish-review fix and is now the fixed rule — no Unicode glyph icon may be reintroduced anywhere in the palette. Selected rows get a pink wash + inset ring; the footer strip shows mono `kbd` hints for arrow/Enter/Esc.

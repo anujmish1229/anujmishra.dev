@@ -1,11 +1,8 @@
 (function () {
     'use strict';
 
-    var state = { ref: 'main' };
     var logList = document.getElementById('log-list');
-    var refName = document.getElementById('ref-name');
-    var refTrigger = document.getElementById('ref-trigger');
-    var refListEl = document.getElementById('ref-list');
+    var tabs = document.querySelectorAll('[data-ref]');
 
     function el(tag, className, text) {
         var node = document.createElement(tag);
@@ -14,142 +11,100 @@
         return node;
     }
 
-    function renderDiffLine(line) {
-        var row = el('span', 'diff__line diff__line--' + line.kind);
-        var marker = el('span', 'diff__marker', line.kind === 'add' ? '+' : line.kind === 'untracked' ? '?' : ' ');
-        row.appendChild(marker);
-        if (line.href) {
-            var a = el('a', 'diff__text diff__link', line.text);
-            a.href = line.href;
-            if (/^https?:/.test(line.href)) { a.target = '_blank'; a.rel = 'noopener'; }
-            row.appendChild(a);
-        } else if (line.kind === 'untracked') {
-            var span = el('span', 'diff__text', line.text);
-            span.setAttribute('aria-disabled', 'true');
-            span.title = 'not committed yet';
-            row.appendChild(span);
-        } else {
-            row.appendChild(el('span', 'diff__text', line.text));
-        }
-        return row;
+    function link(text, href, className) {
+        var a = el('a', className, text);
+        a.href = href;
+        if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; }
+        return a;
     }
 
-    function renderCommit(commit) {
-        var li = el('li', 'commit' + (commit.head ? ' commit--head' : commit.merge ? ' commit--merge' : ''));
-        li.id = 'commit-' + commit.id;
-
+    function shell(modifier) {
+        var li = el('li', 'commit' + (modifier ? ' commit--' + modifier : ''));
         var rail = el('div', 'commit__rail');
         rail.setAttribute('aria-hidden', 'true');
         rail.appendChild(el('span', 'commit__dot'));
         li.appendChild(rail);
-
         var body = el('div', 'commit__body');
+        li.appendChild(body);
+        return { li: li, body: body };
+    }
 
-        var row = el('button', 'commit__row');
-        row.type = 'button';
-        row.setAttribute('aria-expanded', 'false');
-        row.setAttribute('aria-controls', 'detail-' + commit.id);
+    // HEAD: who this is and how to reach him, on top of every ref.
+    function renderHead() {
+        var c = shell('head');
+        c.body.appendChild(el('h1', 'head__name', 'Anuj Mishra'));
+        c.body.appendChild(el('p', 'head__bio', 'Math + Business at Waterloo and Laurier. I build websites and robots. Open to internships and collaborations.'));
+        var links = el('p', 'head__links');
+        links.appendChild(link(SITE.email, 'mailto:' + SITE.email));
+        links.appendChild(link('GitHub', SITE.github));
+        links.appendChild(link('LinkedIn', SITE.linkedin));
+        var resume = el('span', 'head__soon', 'resume soon');
+        resume.title = 'not committed yet';
+        links.appendChild(resume);
+        c.body.appendChild(links);
+        return c.li;
+    }
 
+    function renderLines(lines) {
+        var pre = el('pre', 'diff');
+        lines.forEach(function (line) {
+            var row = el('span', 'diff__line');
+            row.appendChild(el('span', 'diff__marker', '+'));
+            if (typeof line === 'string') row.appendChild(el('span', 'diff__text', line));
+            else row.appendChild(link(line.text, line.href, 'diff__text diff__link'));
+            pre.appendChild(row);
+        });
+        return pre;
+    }
+
+    function renderCommit(commit) {
+        var c = shell(commit.merge ? 'merge' : '');
+        var expandable = commit.lines && !commit.open;
+
+        var row = el(expandable ? 'button' : 'div', 'commit__row');
         var top = el('span', 'commit__top');
-        if (commit.head) top.appendChild(el('span', 'commit__badge', 'HEAD → main'));
-        top.appendChild(el('span', 'commit__msg', commit.message));
+        top.appendChild(el('span', 'commit__msg', commit.title));
+        if (commit.date) top.appendChild(el('span', 'commit__date', commit.date));
         row.appendChild(top);
+        if (commit.summary) row.appendChild(el('span', 'commit__summary', commit.summary));
+        c.body.appendChild(row);
 
-        var meta = el('span', 'commit__meta');
-        if (commit.hash) meta.appendChild(el('span', 'commit__hash', commit.hash));
-        meta.appendChild(el('span', 'commit__date', commit.date));
-
-        var added = 0, removed = 0;
-        (commit.diff || []).forEach(function (l) {
-            if (l.kind === 'add') added++;
-            else if (l.kind === 'remove') removed++;
-        });
-        var stat = el('span', 'commit__stat');
-        stat.appendChild(el('span', 'commit__stat-add', '+' + added));
-        if (removed) stat.appendChild(el('span', 'commit__stat-del', '−' + removed));
-        meta.appendChild(stat);
-
-        (commit.tags || []).forEach(function (t) {
-            meta.appendChild(el('span', 'commit__tag', t));
-        });
-        row.appendChild(meta);
-
-        var chevron = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        chevron.setAttribute('class', 'commit__chevron');
-        chevron.setAttribute('width', '11');
-        chevron.setAttribute('height', '11');
-        chevron.setAttribute('viewBox', '0 0 10 10');
-        chevron.setAttribute('aria-hidden', 'true');
-        var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', 'M2 3.5 5 6.5 8 3.5');
-        path.setAttribute('stroke', 'currentColor');
-        path.setAttribute('stroke-width', '1.4');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('stroke-linejoin', 'round');
-        chevron.appendChild(path);
-        row.appendChild(chevron);
-
-        body.appendChild(row);
+        if (!commit.lines) return c.li;
 
         var detail = el('div', 'commit__detail');
+        detail.appendChild(renderLines(commit.lines));
+        c.body.appendChild(detail);
+        if (!expandable) return c.li;
+
         detail.id = 'detail-' + commit.id;
         detail.hidden = true;
-        var pre = el('pre', 'diff');
-        commit.diff.forEach(function (line) { pre.appendChild(renderDiffLine(line)); pre.appendChild(document.createTextNode('\n')); });
-        detail.appendChild(pre);
-        if (commit.note) detail.appendChild(el('p', 'commit__note', commit.note));
-        body.appendChild(detail);
-
+        row.type = 'button';
+        row.setAttribute('aria-expanded', 'false');
+        row.setAttribute('aria-controls', detail.id);
+        row.insertAdjacentHTML('beforeend', '<svg class="commit__chevron" width="11" height="11" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>');
         row.addEventListener('click', function () {
             var open = row.getAttribute('aria-expanded') === 'true';
             row.setAttribute('aria-expanded', String(!open));
             detail.hidden = open;
         });
-
-        li.appendChild(body);
-        return li;
+        return c.li;
     }
 
     function renderRef(key) {
         var ref = REFS[key];
         if (!ref) return;
-        state.ref = key;
-        refName.textContent = ref.label;
         logList.innerHTML = '';
+        logList.appendChild(renderHead());
         ref.commits.forEach(function (c) { logList.appendChild(renderCommit(c)); });
-        Array.prototype.forEach.call(refListEl.children, function (li) {
-            li.setAttribute('aria-selected', String(li.getAttribute('data-ref') === key));
+        tabs.forEach(function (t) {
+            if (t.getAttribute('data-ref') === key) t.setAttribute('aria-current', 'page');
+            else t.removeAttribute('aria-current');
         });
     }
     window.checkoutRef = renderRef;
 
-    // ref selector
-    refTrigger.addEventListener('click', function () {
-        var open = refTrigger.getAttribute('aria-expanded') === 'true';
-        refTrigger.setAttribute('aria-expanded', String(!open));
-        refListEl.hidden = open;
-    });
-    refListEl.addEventListener('click', function (e) {
-        var li = e.target.closest('[data-ref]');
-        if (!li) return;
-        renderRef(li.getAttribute('data-ref'));
-        refTrigger.setAttribute('aria-expanded', 'false');
-        refListEl.hidden = true;
-        refTrigger.focus();
-    });
-    document.addEventListener('click', function (e) {
-        if (!document.getElementById('ref').contains(e.target)) {
-            refTrigger.setAttribute('aria-expanded', 'false');
-            refListEl.hidden = true;
-        }
-    });
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && refTrigger.getAttribute('aria-expanded') === 'true') {
-            refTrigger.setAttribute('aria-expanded', 'false');
-            refListEl.hidden = true;
-            refTrigger.focus();
-        }
+    tabs.forEach(function (t) {
+        t.addEventListener('click', function () { renderRef(t.getAttribute('data-ref')); });
     });
 
     document.querySelectorAll('[data-cmdk-checkout]').forEach(function (node) {
@@ -173,5 +128,5 @@
         document.addEventListener('keydown', skipBoot, { once: true });
     }
 
-    renderRef('main');
+    renderRef('projects');
 })();
