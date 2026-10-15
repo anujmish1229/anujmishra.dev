@@ -26,30 +26,24 @@ var REFS = {
             {
                 id: 'orgsites',
                 title: 'Community organization websites',
-                summary: 'Sites for three Durham community organizations.',
+                summary: 'Sites for five community organizations in Durham and Uganda.',
                 lines: [
                     { text: 'Hindu Community Centre of Durham', note: 'built as CEO', href: 'https://github.com/anujmish1229/hccd' },
                     { text: 'Senior Buddies Durham', note: 'built as Director', href: 'https://github.com/anujmish1229/seniorBuddies' },
-                    { text: 'Durham Diwali Festival', note: 'rebuilt from Wix in React + Tailwind', href: 'https://github.com/anujmish1229/diwalifestdurham' }
+                    { text: 'Durham Diwali Festival', note: 'rebuilt from Wix in React + Tailwind', href: 'https://github.com/anujmish1229/diwalifestdurham' },
+                    { text: 'OFTAC', note: 'beekeeping livelihoods for refugee families in Uganda', href: 'https://github.com/anujmish1229/oftac' },
+                    { text: 'Elimu Bright Schools', note: 'a school for underserved children in western Uganda', href: 'https://github.com/anujmish1229/Elimu-Bright-Schools' }
                 ]
             },
             {
-                id: 'eugene',
-                title: 'Eugene',
-                summary: 'Autonomous routine for Pickering HS’s Skills Ontario VEX robot.',
-                date: 'Nov 2025 – May 2026',
-                link: 'https://github.com/anujmish1229/eugene',
+                id: 'vex',
+                title: 'VEX robotics',
+                summary: 'Autonomous routines for two VEX V5RC competition robots.',
+                date: 'Aug 2025 – May 2026',
                 lines: [
-                    '1st place, Skills Ontario Durham Regional',
-                    'Advanced to Provincials',
-                    { text: 'github.com/anujmish1229/eugene', href: 'https://github.com/anujmish1229/eugene' }
+                    { text: 'Eugene', note: 'Pickering HS · 1st at Skills Ontario Durham Regional, advanced to Provincials', href: 'https://github.com/anujmish1229/eugene' },
+                    'Ram Rider — team 22108A Mechaknights'
                 ]
-            },
-            {
-                id: 'ramrider',
-                title: 'Ram Rider',
-                summary: 'Autonomous routine for VEX team 22108A Mechaknights.',
-                date: 'Aug 2025 – Feb 2026'
             },
             {
                 id: 'deeporbit',
