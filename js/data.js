@@ -73,9 +73,9 @@ var REFS = {
                 lines: [
                     { text: 'Hindu Community Centre of Durham', note: 'built as CEO', href: 'https://hccd.ca' },
                     { text: 'Senior Buddies Durham', note: 'built as Director', href: 'https://seniorbuddiesdurham.ca' },
-                    { text: 'Durham Diwali Festival', note: 'rebuilt from Wix in React + Tailwind', href: 'https://github.com/anujmish1229/diwalifestdurham' },
-                    { text: 'OFTAC', note: 'beekeeping livelihoods for refugee families in Uganda', href: 'https://github.com/anujmish1229/oftac' },
-                    { text: 'Elimu Bright Schools', note: 'a school for underserved children in western Uganda', href: 'https://github.com/anujmish1229/Elimu-Bright-Schools' }
+                    { text: 'Durham Diwali Festival', note: 'rebuilt from Wix in React + Tailwind', href: 'https://diwalifestdurham.netlify.app' },
+                    { text: 'OFTAC', note: 'beekeeping livelihoods for refugee families in Uganda', href: 'https://oftac.netlify.app' },
+                    { text: 'Elimu Bright Schools', note: 'a school for underserved children in western Uganda', href: 'https://elimubrightschools.org' }
                 ]
             },
             {
