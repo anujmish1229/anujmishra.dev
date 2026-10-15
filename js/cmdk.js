@@ -69,6 +69,9 @@
   ];
 
   (REFS.projects.commits || []).forEach(function (c) {
+    (c.lines || []).forEach(function (l) {
+      if (l.href && l.note) COMMANDS.push({ g: 'Projects', icon: ICONS.external, label: 'Open ' + l.text, keys: l.note, run: open(l.href) });
+    });
     if (!c.link) return;
     COMMANDS.push({
       g: 'Projects', icon: ICONS.external, label: 'Open ' + c.title,

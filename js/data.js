@@ -24,37 +24,13 @@ var REFS = {
                 ]
             },
             {
-                id: 'hccd',
-                title: 'Hindu Community Centre of Durham',
-                summary: 'The centre’s website, built while serving as CEO.',
-                date: 'Sep 2026',
-                link: 'https://github.com/anujmish1229/hccd',
+                id: 'orgsites',
+                title: 'Community organization websites',
+                summary: 'Sites for three Durham community organizations.',
                 lines: [
-                    'TypeScript',
-                    { text: 'github.com/anujmish1229/hccd', href: 'https://github.com/anujmish1229/hccd' }
-                ]
-            },
-            {
-                id: 'seniorbuddies',
-                title: 'Senior Buddies Durham',
-                summary: 'The organization’s website, built while serving as Director.',
-                date: 'Sep 2026',
-                link: 'https://github.com/anujmish1229/seniorBuddies',
-                lines: [
-                    'TypeScript',
-                    { text: 'github.com/anujmish1229/seniorBuddies', href: 'https://github.com/anujmish1229/seniorBuddies' }
-                ]
-            },
-            {
-                id: 'diwali',
-                title: 'Durham Diwali Festival',
-                summary: 'Rebuilt the festival’s Wix site in React.',
-                date: 'Sep 2026',
-                link: 'https://github.com/anujmish1229/diwalifestdurham',
-                lines: [
-                    'React, TypeScript, Tailwind CSS',
-                    'Netlify Forms for newsletter and contact',
-                    { text: 'github.com/anujmish1229/diwalifestdurham', href: 'https://github.com/anujmish1229/diwalifestdurham' }
+                    { text: 'Hindu Community Centre of Durham', note: 'built as CEO', href: 'https://github.com/anujmish1229/hccd' },
+                    { text: 'Senior Buddies Durham', note: 'built as Director', href: 'https://github.com/anujmish1229/seniorBuddies' },
+                    { text: 'Durham Diwali Festival', note: 'rebuilt from Wix in React + Tailwind', href: 'https://github.com/anujmish1229/diwalifestdurham' }
                 ]
             },
             {

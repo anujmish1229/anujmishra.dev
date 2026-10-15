@@ -52,6 +52,7 @@
             row.appendChild(el('span', 'diff__marker', '+'));
             if (typeof line === 'string') row.appendChild(el('span', 'diff__text', line));
             else row.appendChild(link(line.text, line.href, 'diff__text diff__link'));
+            if (line.note) row.appendChild(el('span', 'diff__text', ' — ' + line.note));
             pre.appendChild(row);
         });
         return pre;
