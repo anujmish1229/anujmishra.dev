@@ -33,7 +33,7 @@
     function renderHead() {
         var c = shell('head');
         c.body.appendChild(el('h1', 'head__name', 'Anuj Mishra'));
-        c.body.appendChild(el('p', 'head__bio', 'Math + Business at Waterloo and Laurier. I build websites and robots. Open to internships and collaborations.'));
+        c.body.appendChild(el('p', 'head__bio', 'Math + Business at Waterloo and Laurier. I work across full-stack web, machine learning, and robotics, and I’m most interested in where software meets business. Open to internships and collaborations.'));
         var links = el('p', 'head__links');
         links.appendChild(link(SITE.email, 'mailto:' + SITE.email));
         links.appendChild(link('GitHub', SITE.github));

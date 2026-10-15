@@ -13,6 +13,17 @@ var REFS = {
         label: 'projects',
         commits: [
             {
+                id: 'deeporbit',
+                title: 'Deep Orbit AI',
+                summary: 'Exoplanet-detection model for the NASA Space Apps Challenge.',
+                date: 'Oct 2025',
+                link: 'https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project',
+                lines: [
+                    '99.7% accuracy on NASA datasets',
+                    { text: 'Space Apps project page', href: 'https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project' }
+                ]
+            },
+            {
                 id: 'myhighschool',
                 title: 'myHighSchool.club',
                 summary: 'A web platform that gives high-school clubs their own sites.',
@@ -26,7 +37,8 @@ var REFS = {
             {
                 id: 'orgsites',
                 title: 'Community organization websites',
-                summary: 'Sites for five community organizations in Durham and Uganda.',
+                summary: 'Sites for five community organizations in Durham and Uganda, still maintained.',
+                date: '2022 – now',
                 lines: [
                     { text: 'Hindu Community Centre of Durham', note: 'built as CEO', href: 'https://github.com/anujmish1229/hccd' },
                     { text: 'Senior Buddies Durham', note: 'built as Director', href: 'https://github.com/anujmish1229/seniorBuddies' },
@@ -44,19 +56,19 @@ var REFS = {
                     { text: 'Eugene', note: 'Pickering HS · 1st at Skills Ontario Durham Regional, advanced to Provincials', href: 'https://github.com/anujmish1229/eugene' },
                     'Ram Rider — team 22108A Mechaknights'
                 ]
-            },
-            {
-                id: 'deeporbit',
-                title: 'Deep Orbit AI',
-                summary: 'Exoplanet-detection model for the NASA Space Apps Challenge.',
-                date: 'Oct 2025',
-                lines: ['99.7% accuracy on NASA datasets']
             }
         ]
     },
     experience: {
         label: 'experience',
         commits: [
+            {
+                id: 'exp-myhighschool',
+                merge: true,
+                title: 'myHighSchool.club',
+                summary: 'Deployment Lead and Full-Stack Development Lead · startup',
+                date: 'Jul 2025 – now'
+            },
             {
                 id: 'exp-hccd',
                 merge: true,
@@ -88,13 +100,6 @@ var REFS = {
                 title: 'IQ Brainers Academy',
                 summary: 'Math and Robotics Tutor',
                 date: 'Jul 2024 – Apr 2025'
-            },
-            {
-                id: 'exp-han',
-                merge: true,
-                title: 'Hindu Affinity Network of Durham',
-                summary: 'Volunteer',
-                date: 'Oct 2024 – Jun 2025'
             }
         ]
     },
