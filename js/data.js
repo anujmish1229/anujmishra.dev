@@ -23,7 +23,7 @@ var REFS = {
             {
                 id: 'home-experience',
                 title: 'Experience',
-                summary: 'Deployment and full-stack lead at myHighSchool.club · CEO, Hindu Community Centre of Durham · Director, Senior Buddies',
+                summary: 'Co-founder of myHighSchool.club · Founder & President, Hindu Community Centre of Durham · Board Member, Senior Buddies',
                 goto: 'experience'
             },
             {
@@ -57,8 +57,8 @@ var REFS = {
             {
                 id: 'myhighschool',
                 title: 'myHighSchool.club',
-                summary: 'A web platform that gives high-school clubs their own sites.',
-                date: 'Jul 2025 – now',
+                summary: 'A web platform that gave high-school clubs their own sites; ran for a school year and reached 10+ Ontario high schools.',
+                date: 'Jul 2025 – 2026',
                 link: 'https://myhighschool.club',
                 lines: [
                     'Led production and deployment with a small team',
@@ -71,8 +71,8 @@ var REFS = {
                 summary: 'Sites for five community organizations in Durham and Uganda, still maintained.',
                 date: '2022 – now',
                 lines: [
-                    { text: 'Hindu Community Centre of Durham', note: 'built as CEO', href: 'https://hccd.ca' },
-                    { text: 'Senior Buddies Durham', note: 'built as Director', href: 'https://seniorbuddiesdurham.ca' },
+                    { text: 'Hindu Community Centre of Durham', note: 'built as Founder & President', href: 'https://hccd.ca' },
+                    { text: 'Senior Buddies Durham', note: 'built as Board Member', href: 'https://seniorbuddiesdurham.ca' },
                     { text: 'Durham Diwali Festival', note: 'rebuilt from Wix in React + Tailwind', href: 'https://diwalifestdurham.netlify.app' },
                     { text: 'OFTAC', note: 'beekeeping livelihoods for refugee families in Uganda', href: 'https://oftac.netlify.app' },
                     { text: 'Elimu Bright Schools', note: 'a school for underserved children in western Uganda', href: 'https://elimubrightschools.org' }
@@ -84,7 +84,7 @@ var REFS = {
                 summary: 'Autonomous routines for two VEX V5RC competition robots.',
                 date: 'Aug 2025 – May 2026',
                 lines: [
-                    { text: 'Eugene', note: 'Pickering HS · 1st at Skills Ontario Durham Regional, advanced to Provincials', href: 'https://github.com/anujmish1229/eugene' },
+                    { text: 'Eugene', note: 'Pickering HS · 1st at Skills Ontario Durham Regional, advanced to Provincials', href: 'https://github.com/anujmish1229/vex-v5-eugene-2025-26' },
                     'Ram Rider — team 22108A Mechaknights'
                 ]
             }
@@ -97,14 +97,14 @@ var REFS = {
                 id: 'exp-myhighschool',
                 merge: true,
                 title: 'myHighSchool.club',
-                summary: 'Deployment Lead and Full-Stack Development Lead · startup',
-                date: 'Jul 2025 – now'
+                summary: 'Co-founder · Deployment Lead · Full-Stack Developer',
+                date: 'Jul 2025 – 2026'
             },
             {
                 id: 'exp-hccd',
                 merge: true,
                 title: 'Hindu Community Centre of Durham',
-                summary: 'CEO',
+                summary: 'Founder & President',
                 date: 'Jul 2025 – now',
                 lines: [
                     'Ran community events, from a sports day to a Niagara Falls trip',
@@ -115,7 +115,7 @@ var REFS = {
                 id: 'exp-seniorbuddies',
                 merge: true,
                 title: 'Senior Buddies',
-                summary: 'Director',
+                summary: 'Board Member',
                 date: 'May 2023 – now'
             },
             {
