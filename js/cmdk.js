@@ -57,6 +57,7 @@
   }
 
   var COMMANDS = [
+    { g: 'Go', icon: ICONS.branch, label: 'git checkout home',       keys: 'overview start main', run: checkout('home') },
     { g: 'Go', icon: ICONS.branch, label: 'git checkout projects',   keys: 'projects home ref branch', run: checkout('projects') },
     { g: 'Go', icon: ICONS.branch, label: 'git checkout experience', keys: 'roles jobs work ref branch', run: checkout('experience') },
     { g: 'Go', icon: ICONS.branch, label: 'git checkout about',      keys: 'education skills bio ref branch', run: checkout('about') },
@@ -65,7 +66,7 @@
     { g: 'Contact', icon: ICONS.mail, label: 'Send an email',      keys: 'mailto contact write', run: function () { close(); location.href = 'mailto:' + EMAIL; } },
     { g: 'Contact', icon: ICONS.external, label: 'Open GitHub',    keys: 'code repos source anujmish1229', run: open(SITE.github) },
     { g: 'Contact', icon: ICONS.external, label: 'Open LinkedIn',  keys: 'profile connect anujmish', run: open(SITE.linkedin) },
-    { g: 'Contact', icon: ICONS.file, label: 'Open resume',        keys: 'cv pdf export', run: function () { close(); toast('Resume coming soon'); } }
+    { g: 'Contact', icon: ICONS.file, label: 'Open resume',        keys: 'cv pdf export', run: open(SITE.resume) }
   ];
 
   (REFS.projects.commits || []).forEach(function (c) {

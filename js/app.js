@@ -38,8 +38,8 @@
         links.appendChild(link(SITE.email, 'mailto:' + SITE.email));
         links.appendChild(link('GitHub', SITE.github));
         links.appendChild(link('LinkedIn', SITE.linkedin));
-        var resume = el('span', 'head__soon', 'resume soon');
-        resume.title = 'not committed yet';
+        var resume = link('Resume', SITE.resume);
+        resume.target = '_blank';
         links.appendChild(resume);
         c.body.appendChild(links);
         return c.li;
@@ -62,13 +62,20 @@
         var c = shell(commit.merge ? 'merge' : '');
         var expandable = commit.lines && !commit.open;
 
-        var row = el(expandable ? 'button' : 'div', 'commit__row');
+        var row = el(expandable ? 'button' : commit.goto ? 'a' : 'div', 'commit__row');
         var top = el('span', 'commit__top');
         top.appendChild(el('span', 'commit__msg', commit.title));
         if (commit.date) top.appendChild(el('span', 'commit__date', commit.date));
         row.appendChild(top);
         if (commit.summary) row.appendChild(el('span', 'commit__summary', commit.summary));
         c.body.appendChild(row);
+
+        if (commit.goto) {
+            row.href = '#' + commit.goto;
+            row.classList.add('commit__row--link');
+            row.insertAdjacentHTML('beforeend', '<svg class="commit__chevron commit__chevron--go" width="11" height="11" viewBox="0 0 10 10" aria-hidden="true"><path d="M3.5 2 6.5 5 3.5 8" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg>');
+            row.addEventListener('click', function (e) { e.preventDefault(); go(commit.goto); });
+        }
 
         if (!commit.lines) return c.li;
 
@@ -92,26 +99,37 @@
     }
 
     function renderRef(key) {
-        var ref = REFS[key];
-        if (!ref) return;
+        var ref = REFS[key] ? key : 'home';
         logList.innerHTML = '';
         logList.appendChild(renderHead());
-        ref.commits.forEach(function (c) { logList.appendChild(renderCommit(c)); });
+        REFS[ref].commits.forEach(function (c) { logList.appendChild(renderCommit(c)); });
         tabs.forEach(function (t) {
-            if (t.getAttribute('data-ref') === key) t.setAttribute('aria-current', 'page');
+            if (t.getAttribute('data-ref') === ref) t.setAttribute('aria-current', 'page');
             else t.removeAttribute('aria-current');
         });
     }
-    window.checkoutRef = renderRef;
+
+    // Each ref gets its own URL (#projects, …; home is the bare path) so
+    // back/forward and shared links work.
+    function go(key) {
+        var url = key === 'home' ? location.pathname : '#' + key;
+        if (url !== location.pathname + location.hash) history.pushState(null, '', url);
+        renderRef(key);
+        window.scrollTo(0, 0);
+    }
+    window.checkoutRef = go;
+
+    function fromUrl() { renderRef(location.hash.slice(1) || 'home'); }
+    window.addEventListener('popstate', fromUrl);
 
     tabs.forEach(function (t) {
-        t.addEventListener('click', function () { renderRef(t.getAttribute('data-ref')); });
+        t.addEventListener('click', function () { go(t.getAttribute('data-ref')); });
     });
 
     document.querySelectorAll('[data-cmdk-checkout]').forEach(function (node) {
         node.addEventListener('click', function (e) {
             e.preventDefault();
-            renderRef(node.getAttribute('data-cmdk-checkout'));
+            go(node.getAttribute('data-cmdk-checkout'));
         });
     });
 
@@ -129,5 +147,5 @@
         document.addEventListener('keydown', skipBoot, { once: true });
     }
 
-    renderRef('projects');
+    fromUrl();
 })();

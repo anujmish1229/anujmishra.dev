@@ -380,8 +380,11 @@ html.boot-play .boot__line {
     line-height: inherit;
     position: relative;
 }
-button.commit__row { cursor: pointer; }
-button.commit__row:hover { background: var(--color-surface); }
+button.commit__row,
+.commit__row--link { cursor: pointer; text-decoration: none; }
+button.commit__row:hover,
+.commit__row--link:hover { background: var(--color-surface); }
+.commit__row--link:hover .commit__chevron--go { color: var(--color-accent); transform: translate(2px, -50%); }
 
 .commit__top { display: flex; align-items: baseline; gap: var(--sp-3); }
 
@@ -464,7 +467,6 @@ button.commit__row:hover { background: var(--color-surface); }
     text-decoration: underline dotted;
 }
 .head__links a:hover { color: var(--color-accent-hi); text-decoration: underline solid; }
-.head__soon { color: var(--color-ink-4); cursor: default; }
 
 /* Toast ----------------------------------------------------------------- */
 

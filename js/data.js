@@ -3,12 +3,43 @@
 var SITE = {
     email: 'a85mishr@uwaterloo.ca',
     github: 'https://github.com/anujmish1229',
-    linkedin: 'https://www.linkedin.com/in/anujmish/'
+    linkedin: 'https://www.linkedin.com/in/anujmish/',
+    resume: 'resume.pdf'
 };
 
 // Each commit: title, optional summary and date, optional detail lines
 // (strings or { text, href }). `open` renders the lines inline, no toggle.
+// `goto` turns the row into a link to another ref.
 var REFS = {
+    home: {
+        label: 'home',
+        commits: [
+            {
+                id: 'home-projects',
+                title: 'Projects',
+                summary: 'Deep Orbit AI · myHighSchool.club · 5 community websites · VEX robotics',
+                goto: 'projects'
+            },
+            {
+                id: 'home-experience',
+                title: 'Experience',
+                summary: 'Deployment and full-stack lead at myHighSchool.club · CEO, Hindu Community Centre of Durham · Director, Senior Buddies',
+                goto: 'experience'
+            },
+            {
+                id: 'home-awards',
+                title: 'Awards',
+                summary: 'Bronze at Skills Ontario 2026 · 1st at Skills Durham 2026 · 1st at the Ontario Tech CTF',
+                goto: 'about'
+            },
+            {
+                id: 'home-education',
+                title: 'Education',
+                summary: 'University of Waterloo (B.Math) + Wilfrid Laurier University (BBA), 2026–2031',
+                goto: 'about'
+            }
+        ]
+    },
     projects: {
         label: 'projects',
         commits: [

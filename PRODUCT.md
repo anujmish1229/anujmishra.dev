@@ -24,7 +24,7 @@ Today the site is a single hero view: name, quick-links (email, GitHub, LinkedIn
 ## Capabilities and Constraints
 - Plain static HTML/CSS/JS: no framework, no build step, no package manager (no package.json in the repo). Ships as-is.
 - Real GitHub: `https://github.com/anujmish1229`. Real LinkedIn: `https://www.linkedin.com/in/anujmish/` (blocks automated fetches — HTTP 999 — so future refreshes need the user to paste updated profile text; it cannot be scraped in-session).
-- `resume.pdf` still does not exist — the user has not written a resume yet ("I will need to make my resume after"). Treat the resume link as a real future feature (untracked/pending), not a broken link to fake or silently drop from the design forever.
+- `resume.pdf` lives at the repo root so it is served at `anujmishra.dev/resume.pdf` (added 2026-10-14); linked from the HEAD row, the ⌘K menu, and the noscript fallback.
 - Contact email used in site copy is `a85mishr@uwaterloo.ca` — confirmed directly by the user's own LinkedIn About text.
 
 ## Brand Commitments
@@ -39,7 +39,6 @@ Real project and experience content gathered 2026-09-11 from the user's public G
 - **Experience:** CEO, Hindu Community Centre of Durham (Jul 2025–present); Director, Senior Buddies (May 2023–present); Robotics Coach, Zebra Robotics (Sep 2025–Feb 2026, Ajax ON); Mathematics/Robotics Tutor, IQ Brainers Academy Inc. (Jul 2024–Apr 2025, on-call, Ajax ON); Volunteer, Hindu Affinity Network of Durham (Oct 2024–Jun 2025).
 - **Education:** University of Waterloo, Bachelor of Mathematics (Honours Math + Business double-degree program, Sep 2026–Aug 2031); Wilfrid Laurier University, Lazaridis School of Business & Economics, BBA (same double-degree, Sep 2026–Aug 2031); Pickering High School, diploma (Sep 2022–Jun 2026, extensive activities list on file).
 - **Skills confirmed by name** (LinkedIn hid the rest behind "+N skills," never invent the hidden ones): Python, VEX/Robotics, Strategic Planning, Leadership, Back-End Web Development, Communication; React/TypeScript/Tailwind CSS are verifiable directly from the GitHub repos' own language stats, not a LinkedIn claim.
-- **Still missing:** resume file (user will produce it later).
 
 ## Product Principles
 - Speed to credibility: a recruiter should form an impression and find contact/resume within seconds, without hunting.

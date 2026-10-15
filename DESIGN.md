@@ -195,6 +195,7 @@ The atomic unit of the entire site. A graph dot in the rail column, then a plain
 - **Focus:** no visible focus ring on the ⌘K text input itself (the dialog border stands in); the global focus-visible outline governs every other focusable control.
 
 ### Navigation
+- **Home:** the default view (bare URL), reached from the panda/identity link. It shows HEAD plus one overview row per section (Projects, Experience, Awards, Education); each row is a link with a right-chevron that opens its tab. Tabs and home each have a URL (`#projects`, `#experience`, `#about`), so back/forward work.
 - **Style:** three mono tabs centered in the top bar; the current one is HEAD pink on a pink wash (`aria-current="page"`). Switching a tab redraws the log in place.
 - **Mobile:** the `anujmishra.dev` label hides (panda only), tabs tighten, and the `find` control drops its kbd chip.
 
