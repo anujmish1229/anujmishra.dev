@@ -23,6 +23,8 @@
     --bg: #ffffff;
     --fg: #1f2328;
     --fg-2: #3d444d;
+    --hl-bg: #dafbe1;
+    --hl-fg: #1a7f37;
     --muted: #59636e;
     --line: #d1d9e0;
     --badge-bg: #f6f8fa;
@@ -36,6 +38,8 @@
         --bg: #0d1117;
         --fg: #f0f6fc;
         --fg-2: #c9d1d9;
+        --hl-bg: rgba(46, 160, 67, 0.18);
+        --hl-fg: #56d364;
         --muted: #9198a1;
         --line: #3d444d;
         --badge-bg: #151b23;
@@ -49,6 +53,8 @@
     --bg: #0d1117;
     --fg: #f0f6fc;
     --fg-2: #c9d1d9;
+    --hl-bg: rgba(46, 160, 67, 0.18);
+    --hl-fg: #56d364;
     --muted: #9198a1;
     --line: #3d444d;
     --badge-bg: #151b23;
@@ -124,6 +130,18 @@ a:hover { text-decoration-color: currentColor; }
 .links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 12px; font-size: 14px; }
 .links a { color: var(--muted); }
 .links a:hover { color: var(--fg); }
+.links .links__email { color: var(--fg); text-decoration-color: var(--muted); }
+
+/* Highlight chip, e.g. "S27 internships" */
+.hl {
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--hl-bg);
+    color: var(--hl-fg);
+    text-decoration: none;
+    font-weight: 500;
+}
+a.hl:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Language stack (GitHub-style bar) */
 .stack { margin-bottom: 28px; }
@@ -161,9 +179,13 @@ section li {
     margin-bottom: 10px;
 }
 section li::before {
+    /* Inline (not absolutely positioned) so the dash sits on the first line's
+       baseline even when a badge makes that line taller. */
     content: "-";
-    position: absolute;
-    left: 2px;
+    display: inline-block;
+    width: 18px;
+    margin-left: -18px;
+    padding-left: 2px;
     color: var(--muted);
 }
 
@@ -209,6 +231,10 @@ a.badge:hover { border-color: var(--muted); }
     border-color: color-mix(in srgb, var(--tint) 45%, var(--badge-line));
 }
 a.badge[style*="--tint"]:hover { border-color: var(--tint); }
+/* Laurier purple is very dark; use a stronger wash in light mode and a lighter purple in dark mode. */
+.badge--laurier[style*="--tint"] { background: color-mix(in srgb, var(--tint) 10%, var(--badge-bg)); border-color: color-mix(in srgb, var(--tint) 55%, var(--badge-line)); }
+:root[data-theme="dark"] .badge--laurier { --tint: #9b6fd6 !important; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .badge--laurier { --tint: #9b6fd6 !important; } }
 .badge img { width: 14px; height: 14px; border-radius: 3px; flex: none; }
 
 /* Language + source line under a project, and trailing years. */
@@ -293,6 +319,10 @@ a.badge[style*="--tint"]:hover { border-color: var(--tint); }
 /* Languages */
 .name-note { margin-bottom: 16px; color: var(--fg-2); font-size: 14px; }
 .lang-native { margin-right: 6px; font-weight: 500; }
+.langs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; margin: 10px 0 0; padding: 0; }
+section .langs li { display: flex; justify-content: space-between; align-items: center; line-height: 22px; gap: 12px; padding-left: 0; margin: 0; }
+section .langs li::before { content: none; }
+@media (max-width: 480px) { .langs { grid-template-columns: 1fr; } }
 [lang="zh"], [lang="hi"], [lang="gu"], [lang="pa"], [lang="ur"], [lang="bn"], [lang="pa-Arab"] {
     font-family: system-ui, -apple-system, 'Segoe UI', 'Noto Sans', sans-serif;
 }
@@ -373,3 +403,52 @@ section .tracks li::before { content: none; }
     .uses dd { margin-bottom: 8px; }
     .badge { white-space: normal; }
 }
+
+/* Photos: one bordered card. The stage shows the current shot over a
+   blurred copy of itself, then a caption bar, then a film strip.
+   js/lens.js wires it up and shuffles the order. */
+.lens { margin: 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--bg); }
+.lens__stage { position: relative; aspect-ratio: 3 / 2; overflow: hidden; background: var(--badge-bg); touch-action: pan-y; }
+.lens__bg {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    filter: blur(32px) saturate(1.3); opacity: .55; transform: scale(1.3);
+}
+.lens__open { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; border: 0; cursor: zoom-in; }
+.lens__img { height: 100%; width: auto; max-width: 100%; object-fit: contain; box-shadow: 0 0 24px rgba(0, 0, 0, .25); }
+.lens__img, .lens__bg { transition: opacity .25s; }
+.lens__stage.is-swapping .lens__img { opacity: 0; }
+.lens__stage.is-swapping .lens__bg { opacity: 0; }
+.lens__img:not([src]), .lens__bg:not([src]) { visibility: hidden; }
+
+.lens__bar {
+    display: flex; align-items: center; gap: 12px; margin: 0; padding: 8px 8px 8px 12px;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 13px;
+}
+.lens__cap { flex: 1; min-width: 0; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lens__count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.lens__btn {
+    width: 28px; height: 26px; border: 1px solid var(--badge-line); border-radius: 6px;
+    background: var(--badge-bg); color: var(--fg); font: inherit; line-height: 1; cursor: pointer;
+}
+.lens__btn:hover { border-color: var(--muted); }
+.lens__btn + .lens__btn { margin-left: -6px; }
+
+/* Thumbnail strip: scrolls sideways, keeps the current frame centred,
+   and fades out at both ends. */
+.lens__strip {
+    display: flex; gap: 6px; margin: 0; padding: 10px 8px; list-style: none;
+    overflow-x: auto; scrollbar-width: none; background: var(--badge-bg);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+.lens__strip::-webkit-scrollbar { display: none; }
+section .lens__strip li { flex: none; padding-left: 0; margin: 0; }
+section .lens__strip li::before { content: none; }
+.lens__strip a { display: block; border: 0; border-radius: 4px; overflow: hidden; }
+.lens__strip img { display: block; width: 60px; height: 40px; object-fit: cover; transition: opacity .15s; }
+.lens.is-live .lens__strip img { opacity: .45; }
+.lens.is-live .lens__strip a:hover img, .lens.is-live .lens__strip a[aria-current] img { opacity: 1; }
+.lens__strip a[aria-current] { outline: 2px solid var(--fg); outline-offset: -2px; }
+.lens__strip a:focus-visible { outline: 2px solid var(--link, var(--fg)); outline-offset: 1px; }
+@media (prefers-reduced-motion: reduce) { .lens__img, .lens__bg, .lens__strip img { transition: none; } }
+@media (max-width: 480px) { .lens__stage { aspect-ratio: 4 / 5; } }
