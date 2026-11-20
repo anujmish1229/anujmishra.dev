@@ -3,104 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anuj Mishra — Math + Business @ uWaterloo</title>
-    <meta name="description" content="Anuj Mishra — Math + Business at Waterloo and Laurier. Full-stack web, machine learning, and robotics projects, experience, and contact.">
-    <meta name="theme-color" content="#0b0e11">
+    <title>Anuj Mishra</title>
+    <meta name="description" content="Anuj Mishra studies Math + Business at Waterloo and Laurier. Full-stack web, machine learning, and robotics projects, experience, and contact.">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
     <link rel="canonical" href="https://anujmishra.dev/">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="anujmishra.dev">
     <meta property="og:url" content="https://anujmishra.dev/">
-    <meta property="og:title" content="Anuj Mishra — Math + Business @ uWaterloo">
+    <meta property="og:title" content="Anuj Mishra">
     <meta property="og:description" content="Full-stack web, machine learning, and robotics projects, experience, and contact.">
     <meta property="og:image" content="https://anujmishra.dev/images/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Anuj Mishra's portfolio, styled as a git commit log of projects, experience, awards, and education.">
+    <meta property="og:image:alt" content="Anuj Mishra's portfolio: projects, experience, and awards.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Anuj Mishra — Math + Business @ uWaterloo">
+    <meta name="twitter:title" content="Anuj Mishra">
     <meta name="twitter:description" content="Full-stack web, machine learning, and robotics projects, experience, and contact.">
     <meta name="twitter:image" content="https://anujmishra.dev/images/og.png">
-    <meta name="twitter:image:alt" content="Anuj Mishra's portfolio, styled as a git commit log of projects, experience, awards, and education.">
+    <meta name="twitter:image:alt" content="Anuj Mishra's portfolio: projects, experience, and awards.">
 
     <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="images/panda.png" type="image/png">
     <link rel="apple-touch-icon" href="images/panda.png">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/cmdk.css">
+    <link rel="preload" href="fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/style.css?v=18">
     <script>
     (function () {
-        var cls = 'boot-skip';
         try {
-            var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!reduced && !sessionStorage.getItem('bootPlayed')) {
-                cls = 'boot-play';
-                sessionStorage.setItem('bootPlayed', '1');
-            }
+            var t = localStorage.getItem('theme');
+            if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
         } catch (e) {}
-        document.documentElement.className += ' ' + cls;
     })();
     </script>
 </head>
 <body>
-    <noscript>
-        <div class="noscript">This site renders Anuj's career as an interactive commit log and needs JavaScript. The facts: Math + Business @ University of Waterloo — <a href="mailto:a85mishr@uwaterloo.ca">a85mishr@uwaterloo.ca</a> · <a href="https://github.com/anujmish1229">github.com/anujmish1229</a> · <a href="https://www.linkedin.com/in/anujmish/">linkedin.com/in/anujmish</a> · <a href="resume.pdf">resume</a></div>
-    </noscript>
-    <div class="boot" id="boot" aria-hidden="true">
-        <pre class="boot__line" style="--i:0">$ git clone https://github.com/anujmish1229/anujmishra.dev</pre>
-        <pre class="boot__line boot__line--ok" style="--i:1">Cloning into 'anujmishra.dev'... done.</pre>
-        <pre class="boot__line" style="--i:2">$ git push origin main</pre>
-        <pre class="boot__line boot__line--ok" style="--i:3">main -> main (up to date)</pre>
-        <pre class="boot__line" style="--i:4">$ open https://anujmishra.dev</pre>
-        <pre class="boot__line boot__line--ok" style="--i:5">anujmishra.dev is live</pre>
-    </div>
+    <main class="page" id="top">
 
-    <header class="bar">
-        <a class="bar__identity" href="./" data-cmdk-checkout="home" aria-label="anujmishra.dev home">
-            <img class="bar__logo" src="images/panda.png" alt="" width="20" height="20">
-            <span class="bar__path">anujmishra.dev</span>
-        </a>
+        <header class="head">
+            <div class="head__top">
+                <h1>Anuj Mishra</h1>
+                <nav class="nav" aria-label="Pages">
+                    <a href="./" aria-current="page">home</a>
+                    <a href="personal.html">personal</a>
+                    <a href="writing/">writing</a>
+                </nav>
+            </div>
+            <p>Math + Business at <a class="badge" style="--tint:#ecac39" href="https://uwaterloo.ca/math/" target="_blank" rel="noopener" title="Faculty of Mathematics, University of Waterloo"><img src="images/badges/uwaterloo.png" alt="" width="16" height="16">University of Waterloo</a> and <a class="badge" style="--tint:#fdb811" href="https://www.wlu.ca/academics/faculties/lazaridis-school-of-business-and-economics/index.html" target="_blank" rel="noopener" title="Lazaridis School of Business and Economics, Wilfrid Laurier University"><img src="images/badges/laurier.png" alt="" width="16" height="16">Wilfrid Laurier</a></p>
+            <nav class="links" aria-label="Contact">
+                <a href="mailto:a85mishr@uwaterloo.ca">email</a>
+                <a href="https://github.com/anujmish1229" target="_blank" rel="noopener">github</a>
+                <a href="https://www.linkedin.com/in/anujmish/" target="_blank" rel="noopener">linkedin</a>
+                <a href="resume.pdf" target="_blank" rel="noopener">resume</a>
+            </nav>
+        </header>
 
-        <nav class="tabs" aria-label="Sections">
-            <button class="tabs__tab" type="button" data-ref="projects" aria-current="page">projects</button>
-            <button class="tabs__tab" type="button" data-ref="experience">experience</button>
-            <button class="tabs__tab" type="button" data-ref="about">about</button>
-        </nav>
+        <section aria-labelledby="h-now">
+            <h2 id="h-now">Currently</h2>
+            <ul>
+                <li>In 1A, my first term of the double degree</li>
+                <li>Founding engineer at a stealth startup, on ML and UI/UX <span class="when">since Sep 2026</span></li>
+                <li data-spotify hidden></li>
+            </ul>
+        </section>
 
-        <button class="bar__find" type="button" data-cmdk-open aria-haspopup="dialog" aria-label="Open command menu">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <kbd data-cmdk-key></kbd>
-        </button>
-    </header>
+        <section class="stack" aria-labelledby="h-langs">
+            <h2 id="h-langs">Languages across my public repos</h2>
+            <div class="stack__bar" aria-hidden="true"><span style="--c:#3178c6;width:43.2%"></span><span style="--c:#f05138;width:35.1%"></span><span style="--c:#3572a5;width:15.9%"></span><span style="--c:#663399;width:2.8%"></span><span style="--c:#8c959f;width:2.9%"></span></div>
+            <ul class="stack__legend"><li><span class="lang" style="--c:#3178c6">TypeScript</span> <span class="pct">43.2%</span></li><li><span class="lang" style="--c:#f05138">Swift</span> <span class="pct">35.1%</span></li><li><span class="lang" style="--c:#3572a5">Python</span> <span class="pct">15.9%</span></li><li><span class="lang" style="--c:#663399">CSS</span> <span class="pct">2.8%</span></li><li><span class="lang" style="--c:#8c959f">Other</span> <span class="pct">2.9%</span></li></ul>
+    </section>
 
-    <main class="log" id="log" aria-live="polite">
-        <div class="log__rail" aria-hidden="true"></div>
-        <ol class="log__list" id="log-list"></ol>
+        <section aria-labelledby="h-built">
+            <h2 id="h-built">Projects</h2>
+            <ul class="rows">
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#0b3d91" href="https://nasa-spaceapps-2026.vercel.app" target="_blank" rel="noopener"><img src="images/badges/nasa.png" alt="" width="16" height="16">SAR-Pulse</a><span class="when">2026</span></div>
+                    <p class="row__desc">Maps surface-water change from NASA–ISRO NISAR radar. 1st at a NASA Space Apps local event and a global nominee.</p>
+                    <span class="meta"><span class="lang" style="--c:#3572a5">Python</span><span class="lang" style="--c:#3178c6">TypeScript</span><a href="https://github.com/anujmish1229/nasa-spaceapps-2026" target="_blank" rel="noopener">source</a><a href="https://www.spaceappschallenge.org/2026/find-a-team/exodynamics1/?tab=project" target="_blank" rel="noopener">project page</a></span>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#f59e0b" href="https://github.com/anujmish1229/build" target="_blank" rel="noopener"><img src="images/badges/poltar.png" alt="" width="16" height="16">Poltar</a><span class="when">2026</span></div>
+                    <p class="row__desc">iOS app that scans a room with LiDAR and furnishes it in 3D or AR. Built in one day at UofTHacks.</p>
+                    <span class="meta"><span class="lang" style="--c:#f05138">Swift</span></span>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#46b5f4" href="https://github.com/anujmish1229/myhighschool.club" target="_blank" rel="noopener"><img src="images/badges/myhighschool.png" alt="" width="16" height="16">myHighSchool.club</a><span class="when">2025–2026</span></div>
+                    <p class="row__desc">Co-founder and deployment lead. Club websites for 10+ Ontario high schools.</p>
+                    <span class="meta"><span class="lang" style="--c:#3178c6">TypeScript</span></span>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#0b3d91" href="https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project" target="_blank" rel="noopener"><img src="images/badges/nasa.png" alt="" width="16" height="16">Deep Orbit AI</a><span class="when">2025</span></div>
+                    <p class="row__desc">Exoplanet-detection model, 99.7% accuracy on NASA datasets.</p>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#e5322d" href="https://github.com/anujmish1229/vex-v5-eugene-2025-26" target="_blank" rel="noopener"><img src="images/badges/vex.png" alt="" width="16" height="16">VEX robotics</a><span class="when">2025–2026</span></div>
+                    <p class="row__desc">Lead programmer for two robots. Eugene won the Skills Ontario Durham Regional.</p>
+                    <span class="meta"><span class="lang" style="--c:#3572a5">Python</span></span>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="h-prev">
+            <h2 id="h-prev">Previously</h2>
+            <ul class="rows">
+                <li class="row">
+                    <div class="row__head"><span class="badge" style="--tint:#38abdd"><img src="images/badges/zebra.png" alt="" width="16" height="16">Zebra Robotics</span> <span class="badge">IQ Brainers Academy</span><span class="when">2024–2026</span></div>
+                    <p class="row__desc">Taught robotics and coding, from LEGO SPIKE and Python to Arduino C.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="h-vol">
+            <h2 id="h-vol">Community</h2>
+            <ul class="rows">
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#faac11" href="https://hccd.ca" target="_blank" rel="noopener"><img src="images/badges/hccd.png" alt="" width="16" height="16">Hindu Community Centre of Durham</a><span class="when">2025–2026</span></div>
+                    <p class="row__desc">Founder. Ran community events, recognized by Pickering and Ajax. Built and maintain the site.</p>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#fcd757" href="https://seniorbuddiesdurham.ca" target="_blank" rel="noopener"><img src="images/badges/seniorbuddies.png" alt="" width="16" height="16">Senior Buddies</a><span class="when">since 2023</span></div>
+                    <p class="row__desc">Board member, connecting seniors and youth. Built and maintain the site.</p>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#d49412" href="https://elimubrightschools.org" target="_blank" rel="noopener"><img src="images/badges/elimu.png" alt="" width="16" height="16">Elimu Bright Schools</a><span class="when">since 2025</span></div>
+                    <p class="row__desc">Helping start a school near refugee camps in Uganda. Built and maintain the site.</p>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" href="https://oftac.netlify.app" target="_blank" rel="noopener">OFTAC</a><span class="when">since 2025</span></div>
+                    <p class="row__desc">Built and maintain the site raising donations for refugee beekeepers in Uganda.</p>
+                </li>
+                <li class="row">
+                    <div class="row__head"><a class="badge" style="--tint:#bd63fb" href="https://diwalifestdurham.netlify.app" target="_blank" rel="noopener"><img src="images/badges/diwali.svg" alt="" width="16" height="16">Durham Diwali Festival</a><span class="when">2026</span></div>
+                    <p class="row__desc">Rebuilt the festival site from Wix in React.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="h-awards">
+            <h2 id="h-awards">Awards</h2>
+            <ul class="awards">
+                <li class="award"><span class="row__name">NASA Space Apps</span> <span class="award__res">1st at a local event and global nominee in 2026, 3rd in 2024</span></li>
+                <li class="award"><span class="row__name">Skills Ontario, Web Design</span> <span class="award__res">bronze in 2026, 4th in 2025</span></li>
+                <li class="award"><span class="row__name">Skills Durham, Web Design</span> <span class="award__res">1st in 2026, 2nd in 2025</span></li>
+                <li class="award"><span class="row__name">Ontario Tech × Sun Life CTF</span> <span class="award__res">1st in 2025</span></li>
+            </ul>
+        </section>
+
+        <footer class="foot">
+            <span>Anuj Mishra, 2026. Built with plain HTML, CSS and JS</span>
+            <span class="foot__right">
+                <button type="button" class="theme" data-theme-toggle><span class="to-dark">dark mode</span><span class="to-light">light mode</span></button>
+                <a href="https://github.com/anujmish1229/anujmishra.dev" target="_blank" rel="noopener">source</a>
+                <a href="#top">back to top</a>
+            </span>
+        </footer>
     </main>
 
-    <dialog id="cmdk" class="cmdk" aria-label="Command menu">
-        <div class="cmdk__bar">
-            <span class="cmdk__prompt" aria-hidden="true">&gt;</span>
-            <input id="cmdk-input" class="cmdk__input" type="text" placeholder="Jump to a section, open a link, copy email…"
-                   autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true"
-                   aria-controls="cmdk-list" aria-autocomplete="list">
-        </div>
-        <ul id="cmdk-list" class="cmdk__list" role="listbox"></ul>
-        <p class="cmdk__empty" hidden>no matching commands</p>
-        <div class="cmdk__foot">
-            <span><kbd>&uarr;&darr;</kbd> navigate</span>
-            <span><kbd>Enter</kbd> select</span>
-            <span><kbd>Esc</kbd> close</span>
-        </div>
-        <p id="cmdk-status" class="sr-only" role="status" aria-live="polite"></p>
-    </dialog>
-
-    <script src="js/data.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/cmdk.js"></script>
-    <script src="js/cursor.js"></script>
+    <script src="js/theme.js?v=3"></script>
+    <script src="js/spotify.js?v=2"></script>
+    <script src="js/dots.js?v=6"></script>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found | Anuj Mishra</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/images/panda.png" type="image/png">
+    <link rel="stylesheet" href="/css/style.css?v=18">
+    <script>
+    (function () {
+        try {
+            var t = localStorage.getItem('theme');
+            if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {}
+    })();
+    </script>
+</head>
+<body>
+    <main class="page">
+        <header class="head">
+            <div class="head__top">
+                <p class="site-name"><a href="/">Anuj Mishra</a></p>
+                <nav class="nav" aria-label="Pages">
+                    <a href="/">home</a>
+                    <a href="/personal.html">personal</a>
+                    <a href="/writing/">writing</a>
+                </nav>
+            </div>
+        </header>
+
+        <div class="lost">
+            <img src="/images/panda.png" alt="A panda" width="96" height="96">
+            <h1>Nothing here</h1>
+            <p>The panda looked everywhere. This page doesn't exist, or it moved.</p>
+            <p><a href="/">Back home</a></p>
+        </div>
+    </main>
+    <script src="/js/dots.js?v=6"></script>
+</body>
+</html>

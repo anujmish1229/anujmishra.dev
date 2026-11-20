@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Anuj Mishra: writing</title>
+    <link>https://anujmishra.dev/writing/</link>
+    <description>Essays on tech and whatever else I'm thinking about.</description>
+    <language>en</language>
+    <atom:link href="https://anujmishra.dev/writing/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Technology is getting thicker, and it's not great</title>
+      <link>https://anujmishra.dev/writing/technology-is-getting-thicker</link>
+      <guid isPermaLink="true">https://anujmishra.dev/writing/technology-is-getting-thicker</guid>
+      <pubDate>Fri, 11 Jul 2025 10:19:00 GMT</pubDate>
+      <description>An indictment of big tech's "premium-ization" of devices by making them thicker, furthering the anti-consumer practices from these brands.</description>
+    </item>
+  </channel>
+</rss>
