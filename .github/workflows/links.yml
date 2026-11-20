@@ -14,8 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      # LinkedIn blocks bots; spaceappschallenge.org serves an incomplete TLS chain that
-      # browsers repair but lychee rejects. Both links work in a browser.
+      # LinkedIn and PCPartPicker block bots; spaceappschallenge.org serves an incomplete TLS
+      # chain that browsers repair but lychee rejects. All of these work in a browser.
+      # anujmishra.dev itself is skipped because canonical URLs for new pages only exist
+      # after deploy (relative links are still checked via --root-dir), and localhost
+      # appears in the README's local setup instructions.
       - name: Check links in HTML, JS data and README
         uses: lycheeverse/lychee-action@v2
         with:
@@ -24,5 +27,8 @@ jobs:
             --root-dir "${{ github.workspace }}"
             --exclude "linkedin\.com"
             --exclude "spaceappschallenge\.org"
+            --exclude "pcpartpicker\.com"
+            --exclude "anujmishra\.dev"
+            --exclude "localhost|127\.0\.0\.1"
             index.html personal.html 404.html writing/*.html README.md
           fail: true
