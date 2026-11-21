@@ -1,7 +1,8 @@
 /* Interactive dot field behind the page.
    - A sparse grid of dots everywhere, plus 米行远 (Mǐ Xíngyuǎn) as a brush-script
      scroll in the right margin, drawn from images/name.png (a 1-bit mask).
-   - Every line of text punches a clean box out of the dots, so text is never covered.
+   - Dots part around every line of text: they thin out over a few pixels from the
+     letters, with a ragged edge, and ease back in as the text moves.
    - Dots near the cursor light up and lean away from it.
    - Ambient life: dots twinkle; every few seconds ink runs down the name as if it
      were being brushed; and small travellers (行远, "to travel far") wander the grid.
@@ -15,6 +16,8 @@
   var AMBIENT = 0.07;     // share of grid cells that get an ambient dot
   var CURSOR_R = 110;     // cursor influence radius
   var FPS = 40;
+  var FALL = 7;           // px past a text line over which dots come back
+  var EASE_MS = 90;       // how quickly the clearing follows the text
 
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var page = document.querySelector('.page');
@@ -29,7 +32,9 @@
   var W = 0, H = 0, cols = 0, rows = 0, dpr = 1;
   var dots = null;        // Float32Array: x, y, base, r, g, b, phase, kind
   var count = 0;
-  var mask = null;        // Uint8Array cols*rows: 1 = inside a text box
+  var target = null;      // Float32Array cols*rows: how cleared each cell should be (0 to 1)
+  var clear = null;       // the same, eased towards target every frame
+  var jit = null;         // fixed per-cell jitter, so the edge of a clearing is ragged
   var textRects = [];     // document coords [x0, y0, x1, y1]
   var mouse = { x: -9999, y: -9999, on: false };
   var box = { x0: 0, y0: 0, w: 0, h: 0, on: false };   // where the name sits
@@ -40,7 +45,7 @@
   var colors = { fg: [31, 35, 40], accent: [9, 105, 218], dark: false };
   var glyph = null;       // { data, w, h } from images/name.png
   var NAME_SRC = new URL('../images/name.png', (document.currentScript && document.currentScript.src) || location.href).href;
-  var running = false, last = 0, raf = 0;
+  var running = false, last = 0, raf = 0, prev = 0;
 
   /* ------------------------------------------------------------ colours */
 
@@ -94,7 +99,10 @@
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cols = Math.ceil(W / GAP) + 1; rows = Math.ceil(H / GAP) + 1;
-    mask = new Uint8Array(cols * rows);
+    target = new Float32Array(cols * rows);
+    clear = new Float32Array(cols * rows);
+    jit = new Float32Array(cols * rows);
+    for (var c = 0; c < jit.length; c++) jit[c] = hash(c % cols, Math.floor(c / cols), 3);
     travellers = [];                                   // grid changed; old paths no longer apply
 
     // Name scroll: vertical, in the right margin, clear of the 620px text column.
@@ -115,22 +123,30 @@
         var x = i * GAP, y = j * GAP;
         if (showGlyph && x >= gx0 && x < gx0 + gw && y >= gy0 && y < gy0 + gh) {
           if (covered(x - gx0, y - gy0, gw, gh)) {        // on/off: every dot the same size
-            list.push(x, y, 0.7, -1, 0, 0, Math.random() * 6.28, 1);
+            list.push(x, y, 0.7, -1, 0, 0, hash(i, j, 2) * 6.28, 1);
             continue;
           }
         }
-        if (Math.random() < AMBIENT) list.push(x, y, 0.22, -1, 0, 0, Math.random() * 6.28, 0);
+        // Seeded per cell, so rebuilding the field never re-rolls the pattern.
+        if (hash(i, j, 1) < AMBIENT) list.push(x, y, 0.22, -1, 0, 0, hash(i, j, 2) * 6.28, 0);
       }
     }
     dots = new Float32Array(list);
     count = list.length / 8;
   }
 
+  // Stable pseudo-random number in [0, 1) for a grid cell.
+  function hash(i, j, k) {
+    var h = Math.imul(i, 374761393) ^ Math.imul(j, 668265263) ^ Math.imul(k, 2147483647);
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+  }
+
   /* ----------------------------------------------------- text knockouts */
 
   function measureText() {
     textRects = [];
-    var sx = scrollX, sy = scrollY, PAD_X = 4, PAD_Y = 2;
+    var sx = scrollX, sy = scrollY, PAD_X = 0, PAD_Y = 0;
     function add(r) {
       if (r.width < 1 || r.height < 1) return;
       textRects.push(r.left + sx - PAD_X, r.top + sy - PAD_Y, r.right + sx + PAD_X, r.bottom + sy + PAD_Y);
@@ -144,24 +160,48 @@
       var rs = range.getClientRects();
       for (var i = 0; i < rs.length; i++) add(rs[i]);
     }
-    [].forEach.call(page.querySelectorAll('.badge, .stack__bar, img, .live, .lang, .years__row, .foot'), function (el) {
+    [].forEach.call(page.querySelectorAll('.badge, .stack__bar, img, .live, .lang, .years__row, .foot, .lens'), function (el) {
+      // The photo viewer clears exactly its own card: its blurred backdrop is
+      // scaled past the edges and off-screen thumbnails sit outside it.
+      if (el.tagName === 'IMG' && el.closest('.lens')) return;
       if (el.offsetParent !== null) add(el.getBoundingClientRect());
     });
     fillMask();
   }
 
+  // The clearing map: 1 on a text line, falling to 0 over FALL px past it.
   function fillMask() {
-    if (!mask) return;
-    mask.fill(0);
+    if (!target) return;
+    target.fill(0);
     var sx = scrollX, sy = scrollY;
     for (var k = 0; k < textRects.length; k += 4) {
-      var x0 = textRects[k] - sx, y0 = textRects[k + 1] - sy, x1 = textRects[k + 2] - sx, y1 = textRects[k + 3] - sy;
-      if (y1 < 0 || y0 > H) continue;
-      var i0 = Math.max(0, Math.floor(x0 / GAP)), i1 = Math.min(cols - 1, Math.ceil(x1 / GAP));
-      var j0 = Math.max(0, Math.floor(y0 / GAP)), j1 = Math.min(rows - 1, Math.ceil(y1 / GAP));
-      for (var j = j0; j <= j1; j++) for (var i = i0; i <= i1; i++) mask[j * cols + i] = 1;
+      var l = textRects[k] - sx, t = textRects[k + 1] - sy, r = textRects[k + 2] - sx, b = textRects[k + 3] - sy;
+      if (b < -FALL || t > H + FALL) continue;
+      var i0 = Math.max(0, Math.floor((l - FALL) / GAP)), i1 = Math.min(cols - 1, Math.ceil((r + FALL) / GAP));
+      var j0 = Math.max(0, Math.floor((t - FALL) / GAP)), j1 = Math.min(rows - 1, Math.ceil((b + FALL) / GAP));
+      for (var j = j0; j <= j1; j++) for (var i = i0; i <= i1; i++) {
+        var x = i * GAP, y = j * GAP;
+        var dx = Math.max(l - x, 0, x - r), dy = Math.max(t - y, 0, y - b), dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist >= FALL) continue;
+        var f = 1 - dist / FALL, v = f * f * (3 - 2 * f), c = j * cols + i;
+        if (v > target[c]) target[c] = v;
+      }
+    }
+    if (reduce || !running) clear.set(target);
+  }
+
+  // Ease the clearing towards the map, so dots part and close up smoothly.
+  function ease(dt) {
+    var k = 1 - Math.exp(-dt / EASE_MS);
+    for (var c = 0; c < clear.length; c++) {
+      var d = target[c] - clear[c];
+      clear[c] = d > 0.01 || d < -0.01 ? clear[c] + d * k : target[c];
     }
   }
+
+  // A dot gives way once the clearing passes its own threshold, so the edge is
+  // ragged and a few strays hang on just outside the letters.
+  function gone(c) { return clear[c] > 0.35 + 0.6 * jit[c]; }
 
   /* --------------------------------------------------------------- draw */
 
@@ -176,9 +216,10 @@
 
     for (var d = 0; d < count; d++) {
       var o = d * 8, x = dots[o], y = dots[o + 1];
-      if (mask[Math.round(y / GAP) * cols + Math.round(x / GAP)]) continue;
+      var cell = Math.round(y / GAP) * cols + Math.round(x / GAP);
+      if (gone(cell)) continue;
 
-      var a = dots[o + 2], kind = dots[o + 7];
+      var a = dots[o + 2] * (1 - 0.7 * clear[cell]), kind = dots[o + 7];
       if (!reduce) a *= 0.7 + 0.3 * Math.sin(t * (kind ? 0.0012 : 0.002) + dots[o + 6]);
 
       var boost = 0, ox = 0, oy = 0;
@@ -249,7 +290,7 @@
       var trail = travellers[n].trail;
       for (var k = 0; k < trail.length; k++) {
         var cell = trail[k];
-        if (mask[cell]) continue;
+        if (gone(cell)) continue;
         ctx.globalAlpha = (1 - k / TRAIL) * 0.95;
         var x = (cell % cols) * GAP, y = Math.floor(cell / cols) * GAP;
         ctx.fillRect(x - DOT / 2, y - DOT / 2, DOT, DOT);
@@ -269,6 +310,7 @@
       nextTraveller = t + 2500 + Math.random() * 3500;
     }
     if (t > nextStep) { stepTravellers(); nextStep = t + STEP_MS; }
+    ease(t - (prev || t)); prev = t;
     draw(t);
   }
 
@@ -299,8 +341,11 @@
   document.addEventListener('pointerleave', function () { mouse.on = false; });
   document.addEventListener('visibilitychange', start);
 
-  // Content that moves the text (Spotify filling in, year tabs, theme switch) re-measures.
-  new MutationObserver(soon).observe(page, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'] });
+  // Content that moves the text (Spotify filling in, year tabs, captions)
+  // only re-measures the knockouts; the dots themselves stay put.
+  var pendingText = 0;
+  function soonText() { clearTimeout(pendingText); pendingText = setTimeout(function () { if (innerWidth >= MIN_WIDTH) { measureText(); if (reduce) draw(0); } }, 120); }
+  new MutationObserver(soonText).observe(page, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['hidden'] });
   new MutationObserver(soon).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   if (window.matchMedia) {
     var mq = matchMedia('(prefers-color-scheme: dark)');

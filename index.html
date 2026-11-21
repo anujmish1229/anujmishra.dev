@@ -29,7 +29,7 @@
     <link rel="icon" href="images/panda.png" type="image/png">
     <link rel="apple-touch-icon" href="images/panda.png">
     <link rel="preload" href="fonts/jetbrains-mono-variable.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/style.css?v=24">
+    <link rel="stylesheet" href="css/style.css?v=29">
     <script>
     (function () {
         try {
@@ -63,92 +63,42 @@
         <section aria-labelledby="h-now">
             <h2 id="h-now">Currently</h2>
             <ul>
+                <li>Founding engineer at a stealth startup since Sep 2026, on ML and UI/UX</li>
                 <li>Looking for <a class="hl" href="mailto:a85mishr@uwaterloo.ca?subject=S27%20internship">S27 internships</a> (May to August 2027)</li>
-                <li>In 1A, my first term of the double degree</li>
-                <li>Founding engineer at a stealth startup, on ML and UI/UX <span class="when">since Sep 2026</span></li>
                 <li data-spotify hidden></li>
             </ul>
         </section>
 
-        <section class="stack" aria-labelledby="h-langs">
-            <h2 id="h-langs">Languages across my public repos</h2>
-            <div class="stack__bar" aria-hidden="true"><span style="--c:#3178c6;width:43.2%"></span><span style="--c:#f05138;width:35.1%"></span><span style="--c:#3572a5;width:15.9%"></span><span style="--c:#663399;width:2.8%"></span><span style="--c:#8c959f;width:2.9%"></span></div>
-            <ul class="stack__legend"><li><span class="lang" style="--c:#3178c6">TypeScript</span> <span class="pct">43.2%</span></li><li><span class="lang" style="--c:#f05138">Swift</span> <span class="pct">35.1%</span></li><li><span class="lang" style="--c:#3572a5">Python</span> <span class="pct">15.9%</span></li><li><span class="lang" style="--c:#663399">CSS</span> <span class="pct">2.8%</span></li><li><span class="lang" style="--c:#8c959f">Other</span> <span class="pct">2.9%</span></li></ul>
-    </section>
-
         <section aria-labelledby="h-built">
-            <h2 id="h-built">Projects</h2>
-            <ul class="rows">
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#0b3d91" href="https://nasa-spaceapps-2026.vercel.app" target="_blank" rel="noopener"><img src="images/badges/nasa.png" alt="" width="16" height="16">SAR-Pulse</a><span class="when">2026</span></div>
-                    <p class="row__desc">Maps surface-water change from NASA–ISRO NISAR radar. 1st at a NASA Space Apps local event and a global nominee.</p>
-                    <span class="meta"><span class="lang" style="--c:#3572a5">Python</span><span class="lang" style="--c:#3178c6">TypeScript</span><a href="https://github.com/anujmish1229/nasa-spaceapps-2026" target="_blank" rel="noopener">source</a><a href="https://www.spaceappschallenge.org/2026/find-a-team/exodynamics1/?tab=project" target="_blank" rel="noopener">project page</a></span>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#f59e0b" href="https://github.com/anujmish1229/build" target="_blank" rel="noopener"><img src="images/badges/poltar.png" alt="" width="16" height="16">Poltar</a><span class="when">2026</span></div>
-                    <p class="row__desc">iOS app that scans a room with LiDAR and furnishes it in 3D or AR. Built in one day at UofTHacks.</p>
-                    <span class="meta"><span class="lang" style="--c:#f05138">Swift</span></span>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#46b5f4" href="https://github.com/anujmish1229/myhighschool.club" target="_blank" rel="noopener"><img src="images/badges/myhighschool.png" alt="" width="16" height="16">myHighSchool.club</a><span class="when">2025–2026</span></div>
-                    <p class="row__desc">Co-founder and deployment lead. Club websites for 10+ Ontario high schools.</p>
-                    <span class="meta"><span class="lang" style="--c:#3178c6">TypeScript</span></span>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#0b3d91" href="https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project" target="_blank" rel="noopener"><img src="images/badges/nasa.png" alt="" width="16" height="16">Deep Orbit AI</a><span class="when">2025</span></div>
-                    <p class="row__desc">Exoplanet-detection model, 99.7% accuracy on NASA datasets.</p>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#e5322d" href="https://github.com/anujmish1229/vex-v5-eugene-2025-26" target="_blank" rel="noopener"><img src="images/badges/vex.png" alt="" width="16" height="16">VEX robotics</a><span class="when">2025–2026</span></div>
-                    <p class="row__desc">Lead programmer for two robots. Eugene won the Skills Ontario Durham Regional.</p>
-                    <span class="meta"><span class="lang" style="--c:#3572a5">Python</span></span>
-                </li>
+            <h2 id="h-built">What I've built</h2>
+            <ul>
+                <li><a class="badge" style="--tint:#0b3d91" href="https://nasa-spaceapps-2026.vercel.app" target="_blank" rel="noopener" data-peek="images/peek/sar-pulse.jpg"><img src="images/badges/nasa.png" alt="" width="16" height="16">SAR-Pulse</a> maps surface-water change from NASA–ISRO radar. 1st at a local NASA Space Apps event and a global nominee</li>
+                <li><a class="badge" style="--tint:#f59e0b" href="https://github.com/anujmish1229/build" target="_blank" rel="noopener"><img src="images/badges/poltar.png" alt="" width="16" height="16">Poltar</a> scans a room with LiDAR and furnishes it in AR, an iOS app built in a day at UofTHacks</li>
+                <li><a class="badge" style="--tint:#0b3d91" href="https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project" target="_blank" rel="noopener"><img src="images/badges/nasa.png" alt="" width="16" height="16">Deep Orbit AI</a> finds exoplanets in NASA data with 99.7% accuracy</li>
+                <li>Co-founded <a class="badge" style="--tint:#46b5f4" href="https://github.com/anujmish1229/myhighschool.club" target="_blank" rel="noopener" data-peek="images/peek/myhighschool.jpg"><img src="images/badges/myhighschool.png" alt="" width="16" height="16">myHighSchool.club</a>, club websites for 10+ Ontario high schools</li>
+                <li>Lead programmer for <a class="badge" style="--tint:#e5322d" href="https://github.com/anujmish1229/vex-v5-eugene-2025-26" target="_blank" rel="noopener"><img src="images/badges/vex.png" alt="" width="16" height="16">VEX robotics</a>, our robot won the Skills Ontario Durham Regional</li>
+            </ul>
+            <div class="stack" title="Languages across my public repos">
+                <div class="stack__bar" aria-hidden="true"><span style="--c:#3178c6;width:43.2%"></span><span style="--c:#f05138;width:35.1%"></span><span style="--c:#3572a5;width:15.9%"></span><span style="--c:#663399;width:2.8%"></span><span style="--c:#8c959f;width:2.9%"></span></div>
+                <ul class="stack__legend" aria-label="Languages across my public repos"><li><span class="lang" style="--c:#3178c6">TypeScript</span> <span class="pct">43.2%</span></li><li><span class="lang" style="--c:#f05138">Swift</span> <span class="pct">35.1%</span></li><li><span class="lang" style="--c:#3572a5">Python</span> <span class="pct">15.9%</span></li><li><span class="lang" style="--c:#663399">CSS</span> <span class="pct">2.8%</span></li><li><span class="lang" style="--c:#8c959f">Other</span> <span class="pct">2.9%</span></li></ul>
+            </div>
+        </section>
+
+        <section aria-labelledby="h-community">
+            <h2 id="h-community">Community</h2>
+            <ul>
+                <li>Founded the <a class="badge" style="--tint:#faac11" href="https://hccd.ca" target="_blank" rel="noopener" data-peek="images/peek/hccd.jpg"><img src="images/badges/hccd.png" alt="" width="16" height="16">Hindu Community Centre of Durham</a>, recognized by Pickering and Ajax</li>
+                <li>On the board of <a class="badge" style="--tint:#fcd757" href="https://seniorbuddiesdurham.ca" target="_blank" rel="noopener" data-peek="images/peek/seniorbuddies.jpg"><img src="images/badges/seniorbuddies.png" alt="" width="16" height="16">Senior Buddies</a>, connecting seniors and youth</li>
+                <li>Built and run the sites for both, plus <a class="badge" style="--tint:#d49412" href="https://elimubrightschools.org" target="_blank" rel="noopener" data-peek="images/peek/elimu.jpg"><img src="images/badges/elimu.png" alt="" width="16" height="16">Elimu Bright Schools</a>, <a class="badge" href="https://oftac.netlify.app" target="_blank" rel="noopener" data-peek="images/peek/oftac.jpg">OFTAC</a> and the <a class="badge" style="--tint:#bd63fb" href="https://diwalifestdurham.netlify.app" target="_blank" rel="noopener" data-peek="images/peek/diwali.jpg"><img src="images/badges/diwali.svg" alt="" width="16" height="16">Durham Diwali Festival</a></li>
             </ul>
         </section>
 
         <section aria-labelledby="h-prev">
             <h2 id="h-prev">Previously</h2>
-            <ul class="rows">
-                <li class="row">
-                    <div class="row__head"><span class="badge" style="--tint:#38abdd"><img src="images/badges/zebra.png" alt="" width="16" height="16">Zebra Robotics</span> <span class="badge">IQ Brainers Academy</span><span class="when">2024–2026</span></div>
-                    <p class="row__desc">Taught robotics and coding, from LEGO SPIKE and Python to Arduino C.</p>
-                </li>
-            </ul>
-        </section>
-
-        <section aria-labelledby="h-vol">
-            <h2 id="h-vol">Community</h2>
-            <ul class="rows">
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#faac11" href="https://hccd.ca" target="_blank" rel="noopener"><img src="images/badges/hccd.png" alt="" width="16" height="16">Hindu Community Centre of Durham</a><span class="when">2025–2026</span></div>
-                    <p class="row__desc">Founder. Ran community events, recognized by Pickering and Ajax. Built and maintain the site.</p>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#fcd757" href="https://seniorbuddiesdurham.ca" target="_blank" rel="noopener"><img src="images/badges/seniorbuddies.png" alt="" width="16" height="16">Senior Buddies</a><span class="when">since 2023</span></div>
-                    <p class="row__desc">Board member, connecting seniors and youth. Built and maintain the site.</p>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#d49412" href="https://elimubrightschools.org" target="_blank" rel="noopener"><img src="images/badges/elimu.png" alt="" width="16" height="16">Elimu Bright Schools</a><span class="when">since 2025</span></div>
-                    <p class="row__desc">Helping start a school near refugee camps in Uganda. Built and maintain the site.</p>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" href="https://oftac.netlify.app" target="_blank" rel="noopener">OFTAC</a><span class="when">since 2025</span></div>
-                    <p class="row__desc">Built and maintain the site raising donations for refugee beekeepers in Uganda.</p>
-                </li>
-                <li class="row">
-                    <div class="row__head"><a class="badge" style="--tint:#bd63fb" href="https://diwalifestdurham.netlify.app" target="_blank" rel="noopener"><img src="images/badges/diwali.svg" alt="" width="16" height="16">Durham Diwali Festival</a><span class="when">2026</span></div>
-                    <p class="row__desc">Rebuilt the festival site from Wix in React.</p>
-                </li>
-            </ul>
-        </section>
-
-        <section aria-labelledby="h-awards">
-            <h2 id="h-awards">Awards</h2>
-            <ul class="awards">
-                <li class="award"><span class="row__name">NASA Space Apps</span> <span class="award__res">1st at a local event and global nominee in 2026, 3rd in 2024</span></li>
-                <li class="award"><span class="row__name">Skills Ontario, Web Design</span> <span class="award__res">bronze in 2026, 4th in 2025</span></li>
-                <li class="award"><span class="row__name">Skills Durham, Web Design</span> <span class="award__res">1st in 2026, 2nd in 2025</span></li>
-                <li class="award"><span class="row__name">Ontario Tech × Sun Life CTF</span> <span class="award__res">1st in 2025</span></li>
+            <ul>
+                <li>Taught robotics and coding at <span class="badge" style="--tint:#38abdd"><img src="images/badges/zebra.png" alt="" width="16" height="16">Zebra Robotics</span> and <span class="badge">IQ Brainers Academy</span></li>
+                <li>Bronze in web design at Skills Ontario and 1st at Skills Durham (2026)</li>
+                <li>1st at the Ontario Tech × Sun Life CTF (2025) and 3rd at NASA Space Apps (2024)</li>
             </ul>
         </section>
 
@@ -164,6 +114,7 @@
 
     <script src="js/theme.js?v=3"></script>
     <script src="js/spotify.js?v=2"></script>
-    <script src="js/dots.js?v=6"></script>
+    <script src="js/peek.js?v=1"></script>
+    <script src="js/dots.js?v=8"></script>
 </body>
 </html>

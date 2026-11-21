@@ -320,7 +320,7 @@ a.badge[style*="--tint"]:hover { border-color: var(--tint); }
 .name-note { margin-bottom: 16px; color: var(--fg-2); font-size: 14px; }
 .lang-native { margin-right: 6px; font-weight: 500; }
 .langs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; margin: 10px 0 0; padding: 0; }
-section .langs li { display: flex; justify-content: space-between; align-items: center; line-height: 22px; gap: 12px; padding-left: 0; margin: 0; }
+section .langs li { display: grid; grid-template-columns: 5.5em 1fr auto; align-items: center; line-height: 22px; gap: 12px; padding-left: 0; margin: 0; }
 section .langs li::before { content: none; }
 @media (max-width: 480px) { .langs { grid-template-columns: 1fr; } }
 [lang="zh"], [lang="hi"], [lang="gu"], [lang="pa"], [lang="ur"], [lang="bn"], [lang="pa-Arab"] {
@@ -452,3 +452,42 @@ section .lens__strip li::before { content: none; }
 .lens__strip a:focus-visible { outline: 2px solid var(--link, var(--fg)); outline-offset: 1px; }
 @media (prefers-reduced-motion: reduce) { .lens__img, .lens__bg, .lens__strip img { transition: none; } }
 @media (max-width: 480px) { .lens__stage { aspect-ratio: 4 / 5; } }
+
+.langs .lang-native { margin-right: 0; font-weight: 400; color: var(--fg-2); }
+.langs .lang-native[dir="rtl"] { text-align: left; position: relative; top: -3px; }
+
+/* Project stack bar under "What I've built" */
+section .stack { margin: 16px 0 0; }
+
+/* Badges lift a touch on hover. */
+a.badge { transition: border-color .15s, transform .15s; }
+a.badge:hover { transform: translateY(-1px); }
+
+/* Hover preview of a project (js/peek.js). Positioned with transform so
+   it follows the pointer without layout work. */
+.peek {
+    position: fixed;
+    z-index: 40;
+    left: 0; top: 0;
+    width: 280px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--badge-bg);
+    box-shadow: 0 0 0 1px var(--line), 0 16px 40px -12px rgba(0, 0, 0, .3);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .15s;
+}
+.peek.is-on { opacity: 1; }
+.peek img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+.peek__url {
+    display: block;
+    padding: 5px 10px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media (prefers-reduced-motion: reduce) { .peek, a.badge { transition: none; } a.badge:hover { transform: none; } }
