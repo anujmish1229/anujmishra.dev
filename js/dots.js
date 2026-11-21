@@ -338,8 +338,14 @@
   addEventListener('resize', soon);
   addEventListener('scroll', function () { fillMask(); if (reduce) draw(0); }, { passive: true });
   addEventListener('pointermove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; mouse.on = e.pointerType !== 'touch'; }, { passive: true });
-  document.addEventListener('pointerleave', function () { mouse.on = false; });
-  document.addEventListener('visibilitychange', start);
+  // Forget the cursor whenever it can't be over the page: it left the
+  // window, the window lost focus, or the tab was hidden. Otherwise the
+  // glow stays frozen where the pointer was last seen.
+  function away() { mouse.on = false; if (innerWidth >= MIN_WIDTH && (reduce || !running)) draw(last); }
+  document.addEventListener('mouseout', function (e) { if (!e.relatedTarget) away(); });
+  document.documentElement.addEventListener('mouseleave', away);
+  addEventListener('blur', away);
+  document.addEventListener('visibilitychange', function () { if (document.hidden) away(); start(); });
 
   // Content that moves the text (Spotify filling in, year tabs, captions)
   // only re-measures the knockouts; the dots themselves stay put.
