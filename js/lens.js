@@ -114,6 +114,7 @@
   });
 
   root.addEventListener('keydown', function (e) {
+    if (modal.open) return;
     var d = { ArrowLeft: -1, ArrowRight: 1 }[e.key];
     if (!d) return;
     e.preventDefault();
@@ -127,6 +128,72 @@
     if (x0 === null) return;
     var dx = e.clientX - x0; x0 = null;
     if (Math.abs(dx) > 40) show(current + (dx < 0 ? 1 : -1));
+  });
+
+  /* Modal: clicking the photo opens it large, with what's in it on the
+     left and where it was taken on the right. Arrow keys and the side
+     buttons step through, Escape or a click outside closes it. */
+  var modal = document.createElement('dialog');
+  modal.className = 'lens-modal';
+  modal.setAttribute('aria-label', 'Photo');
+  modal.tabIndex = -1;
+  modal.innerHTML =
+    '<div class="lens-modal__frame">' +
+      '<img class="lens-modal__img" alt="">' +
+      '<button type="button" class="lens-modal__close" aria-label="Close">\u00d7</button>' +
+      '<button type="button" class="lens-modal__nav lens-modal__nav--prev" data-step="-1" aria-label="Previous photo">\u2190</button>' +
+      '<button type="button" class="lens-modal__nav lens-modal__nav--next" data-step="1" aria-label="Next photo">\u2192</button>' +
+    '</div>' +
+    '<div class="lens-modal__info">' +
+      '<p class="lens-modal__desc"></p>' +
+      '<p class="lens-modal__place"></p>' +
+    '</div>';
+  document.body.appendChild(modal);
+  var mImg = modal.querySelector('.lens-modal__img');
+  var mDesc = modal.querySelector('.lens-modal__desc');
+  var mPlace = modal.querySelector('.lens-modal__place');
+
+  function fill() {
+    var a = links[current];
+    mImg.src = a.href;
+    mImg.alt = a.querySelector('img').alt;
+    mDesc.textContent = a.dataset.desc || a.dataset.caption;
+    mPlace.textContent = a.dataset.place || '';
+  }
+
+  function openModal() {
+    if (!modal.showModal) return false;
+    fill();
+    modal.showModal();
+    modal.focus(); // keep the focus ring off the close button until someone tabs
+    document.documentElement.classList.add('modal-open');
+    return true;
+  }
+
+  open.addEventListener('click', function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (openModal()) e.preventDefault();
+  });
+
+  [].forEach.call(modal.querySelectorAll('[data-step]'), function (b) {
+    b.addEventListener('click', function () { show(current + +b.dataset.step); fill(); });
+  });
+  modal.querySelector('.lens-modal__close').addEventListener('click', function () { modal.close(); });
+  modal.addEventListener('click', function (e) { if (e.target === modal) modal.close(); });
+  modal.addEventListener('close', function () { document.documentElement.classList.remove('modal-open'); });
+  modal.addEventListener('keydown', function (e) {
+    var d = { ArrowLeft: -1, ArrowRight: 1 }[e.key];
+    if (!d) return;
+    e.preventDefault();
+    e.stopPropagation();
+    show(current + d); fill();
+  });
+  var mx0 = null;
+  modal.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') mx0 = e.clientX; });
+  modal.addEventListener('pointerup', function (e) {
+    if (mx0 === null) return;
+    var dx = e.clientX - mx0; mx0 = null;
+    if (Math.abs(dx) > 40) { show(current + (dx < 0 ? 1 : -1)); fill(); }
   });
 
   stage.hidden = false;
