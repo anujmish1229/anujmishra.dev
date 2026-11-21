@@ -1,0 +1,195 @@
+%-------------------------
+% Anuj Mishra, resume for AI/ML software engineering roles.
+% Based on Jake Gutierrez's resume template (MIT licence):
+% https://github.com/jakegut/resume
+%
+% Build (from the repo root):  tectonic -o . resume/resume.tex
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Anuj Mishra} \\ \vspace{1pt}
+    \small +1 (647) 303-4041 $|$
+    \href{mailto:a85mishr@uwaterloo.ca}{\underline{a85mishr@uwaterloo.ca}} $|$
+    \href{https://anujmishra.dev}{\underline{anujmishra.dev}} $|$
+    \href{https://github.com/anujmish1229}{\underline{github.com/anujmish1229}} $|$
+    \href{https://www.linkedin.com/in/anujmish/}{\underline{linkedin.com/in/anujmish}}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Waterloo \& Wilfrid Laurier University}{Waterloo, ON}
+      {BMath (Honours) + BBA, Double Degree}{Sep 2026 -- Aug 2031}
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+          {\textbf{\href{https://nasa-spaceapps-2026.vercel.app}{\underline{SAR-Pulse}}} $|$ \emph{Python, NumPy, rasterio, FastAPI, Next.js, TypeScript}}{Nov 2026}
+          \resumeItemListStart
+            \resumeItem{Built a pipeline mapping \textbf{surface-water change} between \textbf{NISAR} satellite radar passes, thresholded per image}
+            \resumeItem{Streamed only the study area from \textbf{\textasciitilde7 GB HDF5} granules via authenticated HTTP range requests, in parallel}
+            \resumeItem{Scored the water maps against independent NASA OPERA radar and optical products and a Sentinel-1 C-band change map, served through a \textbf{FastAPI} API and a \textbf{Next.js} map}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{\href{https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project}{\underline{Deep Orbit AI}}} $|$ \emph{TensorFlow, TensorFlow.js, JavaScript}}{Oct 2025}
+          \resumeItemListStart
+            \resumeItem{Co-built a browser-based \textbf{exoplanet classifier} on Kepler and TESS data; the team's model hit \textbf{99.7\% accuracy}}
+            \resumeItem{Led web development on a 4-person team and contributed to the backend and \textbf{machine learning} pipeline}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/anujmish1229/build}{\underline{Poltar}}} $|$ \emph{Swift, SwiftUI, RoomPlan, SceneKit}}{Oct 2026}
+          \resumeItemListStart
+            \resumeItem{Co-built an on-device iOS app at \textbf{UofTHacks Hack-or-Treat} that scans a room with \textbf{LiDAR}, fits real furniture to it with a layout solver, and takes plain-language edits through \textbf{Apple Intelligence}}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/anujmish1229/vex-v5-eugene-2025-26}{\underline{VEX V5 Robotics, Lead Programmer}}} $|$ \emph{Python, PID Control}}{Aug 2025 -- May 2026}
+          \resumeItemListStart
+            \resumeItem{Wrote \textbf{PID-controlled} autonomous routines for team 22108A, reaching playoffs at every event in its rookie season}
+            \resumeItem{Programmed robot Eugene's autonomous path, winning \textbf{1st in Skills} at the Skills Ontario Durham Regional}
+          \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {ML Engineer}{Sep 2026 -- Present}
+      {AI/ML Product (In Development)}{}
+      \resumeItemListStart
+        \resumeItem{Building an AI/ML product as its \textbf{machine learning} engineer}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Co-Founder \& Deployment Lead}{Jul 2025 -- Present}
+      {myHighSchool.club}{Remote}
+      \resumeItemListStart
+        \resumeItem{Co-founded a platform giving clubs at \textbf{10+ Ontario high schools} their own sites in \textbf{React} and \textbf{TypeScript}}
+        \resumeItem{Designed the \textbf{PostgreSQL} schema and server-side data layer on \textbf{Supabase}}
+        \resumeItem{Lead a team of developers and own production deployments and releases, with CI on \textbf{GitHub Actions}}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Chief Executive Officer}{Jul 2025 -- Present}
+      {Hindu Community Centre of Durham}{Durham Region, ON}
+      \resumeItemListStart
+        \resumeItem{Raised \textbf{\$60K+} for Durham Region's first Diwali drone show; built hccd.ca and rebuilt the festival site in \textbf{React}}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Robotics Coach}{Sep 2025 -- Feb 2026}
+      {Zebra Robotics}{Ajax, ON}
+      \resumeItemListStart
+        \resumeItem{Taught robotics and coding to students, from LEGO SPIKE and \textbf{Python} to \textbf{Arduino C}}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------AWARDS-----------
+\section{Awards}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{NASA Space Apps Challenge}{: 1st place at a local event and global nominee (2026), 3rd place (2024)} \\
+     \textbf{Skills Ontario}{: Bronze, Provincials, Web Development (2026); 1st, Durham Regional, Web Design (2026)} \\
+     \textbf{Ontario Tech $\times$ Sun Life CTF}{: 1st place (2025)}
+    }}
+ \end{itemize}
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: Python, TypeScript, JavaScript, Swift, SQL, Java, C (Arduino), HTML/CSS} \\
+     \textbf{ML \& Data}{: TensorFlow, TensorFlow.js, NumPy, rasterio, geospatial raster processing} \\
+     \textbf{Frameworks}{: FastAPI, React, Next.js, SwiftUI, Tailwind CSS} \\
+     \textbf{Tools}{: Git, GitHub Actions, Supabase, PostgreSQL, Vercel, Netlify}
+    }}
+ \end{itemize}
+
+\end{document}
