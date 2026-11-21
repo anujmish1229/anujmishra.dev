@@ -13,6 +13,7 @@
 \usepackage{titlesec}
 \usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
+\definecolor{accent}{rgb}{0.776,0,0.471} % Waterloo Math pink, #C60078
 \usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
@@ -45,8 +46,8 @@
 
 % Sections formatting
 \titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+  \vspace{-4pt}\scshape\raggedright\large\color{accent}
+}{}{0em}{}[\color{accent}\titlerule \vspace{-5pt}]
 
 %-------------------------
 % Custom commands
@@ -85,7 +86,7 @@
 
 %----------HEADING----------
 \begin{center}
-    \textbf{\Huge \scshape Anuj Mishra} \\ \vspace{1pt}
+    \textbf{\Huge \scshape \color{accent}Anuj Mishra} \\ \vspace{1pt}
     \small +1 (647) 303-4041 $|$
     \href{mailto:a85mishr@uwaterloo.ca}{\underline{a85mishr@uwaterloo.ca}} $|$
     \href{https://anujmishra.dev}{\underline{anujmishra.dev}} $|$
@@ -106,7 +107,7 @@
     \resumeSubHeadingListStart
 
       \resumeProjectHeading
-          {\textbf{\href{https://nasa-spaceapps-2026.vercel.app}{\underline{SAR-Pulse}}} $|$ \emph{Python, NumPy, rasterio, FastAPI, Next.js, TypeScript}}{Nov 2026}
+          {\textbf{\href{https://nasa-spaceapps-2026.vercel.app}{\color{accent}SAR-Pulse}} $|$ \emph{Python, NumPy, rasterio, FastAPI, Next.js, TypeScript}}{Nov 2026}
           \resumeItemListStart
             \resumeItem{Built a pipeline mapping \textbf{surface-water change} between \textbf{NISAR} satellite radar passes, thresholded per image}
             \resumeItem{Streamed only the study area from \textbf{\textasciitilde7 GB HDF5} granules via authenticated HTTP range requests, in parallel}
@@ -114,20 +115,20 @@
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{\href{https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project}{\underline{Deep Orbit AI}}} $|$ \emph{TensorFlow, TensorFlow.js, JavaScript}}{Oct 2025}
+          {\textbf{\href{https://www.spaceappschallenge.org/2025/find-a-team/outspace2/?tab=project}{\color{accent}Deep Orbit AI}} $|$ \emph{TensorFlow, TensorFlow.js, JavaScript}}{Oct 2025}
           \resumeItemListStart
             \resumeItem{Co-built a browser-based \textbf{exoplanet classifier} on Kepler and TESS data; the team's model hit \textbf{99.7\% accuracy}}
             \resumeItem{Led web development on a 4-person team and contributed to the backend and \textbf{machine learning} pipeline}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{\href{https://github.com/anujmish1229/build}{\underline{Poltar}}} $|$ \emph{Swift, SwiftUI, RoomPlan, SceneKit}}{Oct 2026}
+          {\textbf{\href{https://github.com/anujmish1229/build}{\color{accent}Poltar}} $|$ \emph{Swift, SwiftUI, RoomPlan, SceneKit}}{Oct 2026}
           \resumeItemListStart
             \resumeItem{Co-built an on-device iOS app at \textbf{UofTHacks Hack-or-Treat} that scans a room with \textbf{LiDAR}, fits real furniture to it with a layout solver, and takes plain-language edits through \textbf{Apple Intelligence}}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{\href{https://github.com/anujmish1229/vex-v5-eugene-2025-26}{\underline{VEX V5 Robotics, Lead Programmer}}} $|$ \emph{Python, PID Control}}{Aug 2025 -- May 2026}
+          {\textbf{\href{https://github.com/anujmish1229/vex-v5-eugene-2025-26}{\color{accent}VEX V5 Robotics, Lead Programmer}} $|$ \emph{Python, PID Control}}{Aug 2025 -- May 2026}
           \resumeItemListStart
             \resumeItem{Wrote \textbf{PID-controlled} autonomous routines for team 22108A, reaching playoffs at every event in its rookie season}
             \resumeItem{Programmed robot Eugene's autonomous path, winning \textbf{1st in Skills} at the Skills Ontario Durham Regional}
