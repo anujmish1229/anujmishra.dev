@@ -19,10 +19,12 @@ My personal site. I'm Anuj Mishra, a Math + Business student at the University o
 
 - **Interactive dot background.** My Chinese name, 米行远 (Mǐ Xíngyuǎn), is drawn in dots as a brush-script scroll in the right margin. Text knocks clean boxes out of the dots, dots near the cursor light up and lean away, ink runs down the name every few seconds, and small "travellers" wander across the grid (行远 means "to travel far"). It only runs on wide screens, draws a single still frame for `prefers-reduced-motion`, and pauses when the tab is hidden.
 - **Live Spotify.** A Netlify Function reads what I'm playing (or played last) and my top tracks this month. If it can't be reached, those parts of the page stay hidden instead of breaking.
-- **Badges.** Organizations and projects appear as small chips with their own icon, tinted in that icon's colour.
+- **Badges.** Organizations and projects appear as inline links with their own icon, underlined in that icon's colour.
+- **Link previews.** Hovering a project or organization link with a mouse shows a small screenshot of that site.
+- **Photo viewer.** The personal page has a gallery of my photos, each with a note on what's in the shot and where it was taken.
 - **GitHub details.** GitHub's colours, language dots on projects, and a bar showing the languages across my public repos.
 - **Light and dark themes** that follow the system setting, with a toggle that remembers your choice.
-- **No JavaScript needed for content.** Everything is static HTML. Scripts only add the theme toggle, the year tabs, Spotify and the dots.
+- **No JavaScript needed for content.** Everything is static HTML. Scripts only add the theme toggle, the year tabs, Spotify, link previews, the photo viewer and the dots.
 
 ## Tech stack
 
@@ -48,11 +50,15 @@ js/theme.js                     Light/dark toggle
 js/years.js                     Year tabs on the personal page
 js/spotify.js                   Fills the Spotify line and top tracks from /api/spotify
 js/dots.js                      The interactive dot background
+js/peek.js                      Screenshot preview when hovering a project link
+js/lens.js                      Photo viewer on the personal page
 
 netlify/functions/spotify.mjs   Serves /api/spotify from the Spotify Web API
 
 images/name.png                 1-bit mask of 米行远 that js/dots.js draws in dots
 images/badges/                  16px icons for the badges
+images/peek/                    Site screenshots for the hover previews
+images/photos/                  Photos for the personal page (full size and -xs thumbnails)
 images/panda.png                Favicon and 404 panda
 images/og.png                   Link preview image for social media
 images/screenshot.png           The screenshot in this README
@@ -60,6 +66,7 @@ images/screenshot.png           The screenshot in this README
 scripts/spotify-auth.mjs        One-time helper that gets the Spotify refresh token
 scripts/render-name.py          Regenerates images/name.png
 fonts/                          Self-hosted WOFF2 fonts
+resume/resume.tex               Resume source (build: tectonic -o . resume/resume.tex)
 resume.pdf                      Linked from the header
 ```
 
@@ -122,5 +129,6 @@ All content lives in the HTML files.
 ## Credits
 
 - 米行远 is drawn from [Zhi Mang Xing](https://fonts.google.com/specimen/Zhi+Mang+Xing) by Wei Zhimang, under the SIL Open Font License. Only the rendered mask ships with the site, not the font.
+- Text is set in [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4) by Adobe, under the SIL Open Font License.
 - Colours follow GitHub's [Primer](https://primer.style) palette.
 - Badge icons belong to their organizations.
