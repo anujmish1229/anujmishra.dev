@@ -1,21 +1,39 @@
 /* anujmishra.dev: one narrow column, inline badges, GitHub (Primer) colours. */
 
 @font-face {
-    font-family: 'Archivo';
+    font-family: 'Source Serif 4';
     font-style: normal;
     font-weight: 400 800;
     font-display: swap;
-    src: url('../fonts/archivo-variable.woff2') format('woff2-variations'),
-         url('../fonts/archivo-variable.woff2') format('woff2');
+    src: url('../fonts/source-serif-4-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 @font-face {
-    font-family: 'JetBrains Mono';
+    font-family: 'Source Serif 4';
     font-style: normal;
     font-weight: 400 800;
     font-display: swap;
-    src: url('../fonts/jetbrains-mono-variable.woff2') format('woff2-variations'),
-         url('../fonts/jetbrains-mono-variable.woff2') format('woff2');
+    src: url('../fonts/source-serif-4-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Source Serif 4';
+    font-style: italic;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('../fonts/source-serif-4-italic-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+    font-family: 'Source Serif 4';
+    font-style: italic;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('../fonts/source-serif-4-italic-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 :root {
@@ -68,8 +86,8 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--fg);
-    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 14px;
+    font-family: 'Source Serif 4', Charter, Georgia, 'Times New Roman', serif;
+    font-size: 16px;
     line-height: 1.7;
     position: relative;
     -webkit-font-smoothing: antialiased;
@@ -113,11 +131,11 @@ a:hover { text-decoration-color: currentColor; }
     align-items: baseline;
     gap: 4px 16px;
 }
-.nav { display: flex; gap: 14px; font-size: 14px; }
+.nav { display: flex; gap: 14px; font-size: 16px; }
 .nav a { color: var(--muted); text-decoration: none; }
 .nav a:hover { color: var(--fg); }
 .nav a[aria-current="page"] { color: var(--fg); }
-.site-name { font-weight: 700; font-size: 16px; }
+.site-name { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
 .site-name a { text-decoration: none; }
 .page-title { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; margin-top: 32px; }
 .lede { color: var(--muted); margin-top: 6px; }
@@ -127,7 +145,7 @@ a:hover { text-decoration-color: currentColor; }
 .head p { margin-top: 4px; }
 .head > p:not(.lede) { margin-top: 14px; }   /* schools line: room below the nav */
 
-.links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 12px; font-size: 14px; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 12px; font-size: 16px; }
 .links a { color: var(--muted); }
 .links a:hover { color: var(--fg); }
 .links .links__email { color: var(--fg); text-decoration-color: var(--muted); }
@@ -171,7 +189,7 @@ a.hl:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Sections */
 section { margin-bottom: 36px; }
-h2 { font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 10px; }
+h2 { font-size: 16px; font-weight: 500; color: var(--muted); margin-bottom: 10px; }
 
 section li {
     position: relative;
@@ -200,42 +218,28 @@ section .rows li.row::before { content: none; }
 }
 .row__head .when { margin-left: auto; padding-left: 12px; }
 .row__name { font-weight: 600; }
-.row__desc { margin-top: 4px; font-size: 14px; color: var(--fg-2); line-height: 1.5; }
+.row__desc { margin-top: 4px; font-size: 16px; color: var(--fg-2); line-height: 1.5; }
 .row .meta { margin-top: 4px; }
 
 section .awards li { padding-left: 0; margin-bottom: 8px; }
 section .awards li::before { content: none; }
 .award .row__name { font-weight: 500; }
-.award__res { color: var(--fg-2); font-size: 14px; margin-left: 6px; }
+.award__res { color: var(--fg-2); font-size: 16px; margin-left: 6px; }
 
-/* Badge: a small inline chip with an optional 16px icon. */
+/* Badge: an inline link with the org's icon, underlined in the org's colour. */
 .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 0 6px;
-    margin: 1px 0;
-    border: 1px solid var(--badge-line);
-    border-radius: 6px;
-    background: var(--badge-bg);
-    font-size: 14px;
-    line-height: 22px;
     white-space: nowrap;
-    vertical-align: baseline;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: var(--link-line);
 }
-a.badge:hover { border-color: var(--muted); }
-/* Tinted badges pick up the org's own colour from their icon. */
-.badge[style*="--tint"] {
-    background: color-mix(in srgb, var(--tint) 14%, var(--badge-bg));
-    border-color: color-mix(in srgb, var(--tint) 45%, var(--badge-line));
-}
-a.badge[style*="--tint"]:hover { border-color: var(--tint); }
-/* Laurier purple is very dark; use a stronger wash in light mode and a lighter purple in dark mode. */
-.badge--laurier[style*="--tint"] { background: color-mix(in srgb, var(--tint) 10%, var(--badge-bg)); border-color: color-mix(in srgb, var(--tint) 55%, var(--badge-line)); }
+.badge[style*="--tint"] { text-decoration-color: color-mix(in srgb, var(--tint) 70%, transparent); }
+a.badge:hover { text-decoration-color: var(--tint, currentColor); }
+/* Laurier purple is very dark; use a lighter purple in dark mode. */
 :root[data-theme="dark"] .badge--laurier { --tint: #9b6fd6 !important; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .badge--laurier { --tint: #9b6fd6 !important; } }
-.badge img { width: 14px; height: 14px; border-radius: 3px; flex: none; }
+.badge img { display: inline; width: .9em; height: .9em; vertical-align: -.1em; margin-right: .3em; border-radius: 3px; }
 
 /* Language + source line under a project, and trailing years. */
 .meta {
@@ -312,12 +316,12 @@ a.badge[style*="--tint"]:hover { border-color: var(--tint); }
 .year--now::before { box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--fg); }
 .year[aria-selected="true"] { font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
 .years__panel { margin-top: 16px; }
-.years__panel h3 { font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+.years__panel h3 { font-size: 16px; font-weight: 600; margin: 0 0 6px; }
 .years__panel[hidden] { display: none; }
 .js .years__panel h3 { display: none; }
 
 /* Languages */
-.name-note { margin-bottom: 16px; color: var(--fg-2); font-size: 14px; }
+.name-note { margin-bottom: 16px; color: var(--fg-2); font-size: 16px; }
 .lang-native { margin-right: 6px; font-weight: 500; }
 .langs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; margin: 10px 0 0; padding: 0; }
 section .langs li { display: grid; grid-template-columns: 5.5em 1fr auto; align-items: center; line-height: 22px; gap: 12px; padding-left: 0; margin: 0; }
@@ -348,7 +352,7 @@ section .tracks li::before { content: none; }
 .post h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; }
 .post .lede { margin-top: 8px; }
 .post .meta-line { margin-top: 10px; font-size: 13px; color: var(--muted); }
-.post__body { margin-top: 28px; font-family: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; font-size: 16px; line-height: 1.75; }
+.post__body { margin-top: 28px; font-size: 17px; line-height: 1.75; }
 .post__body p + p { margin-top: 1.1em; }
 .note { margin-top: 32px; font-size: 13px; color: var(--muted); }
 

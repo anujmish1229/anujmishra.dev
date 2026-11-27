@@ -29,7 +29,7 @@ My personal site. I'm Anuj Mishra, a Math + Business student at the University o
 Plain HTML, CSS and JavaScript. No framework, no build step, no npm dependencies on the site.
 
 - **Hosting:** Netlify, with one Netlify Function for Spotify
-- **Fonts:** JetBrains Mono, plus Archivo for essay text, both self-hosted
+- **Fonts:** Source Serif 4, self-hosted
 - **CI:** a GitHub Actions link check with [lychee](https://github.com/lycheeverse/lychee), on every push and weekly
 
 ## Project structure
